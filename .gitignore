@@ -1,0 +1,22 @@
+# Hugo build output
+public/
+resources/
+
+# Node modules
+node_modules/
+
+# Tailwind generated CSS
+/themes/tailwind/static/css/tailwind.css
+/themes/tailwind/.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Submodules
+/themes/ananke/
