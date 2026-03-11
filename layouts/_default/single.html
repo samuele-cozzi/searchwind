@@ -27,28 +27,3 @@
 </article>
 {{ end }}
 
-{{ define "sidebar-tags" }}
-<div>
-  <h2 class="text-lg font-bold mb-4">Tags</h2>
-  <ul class="space-y-2">
-    {{ range (.GetTerms "tags") }}
-      <li>
-        <a href="{{ .RelPermalink }}" class="text-blue-600 hover:underline text-sm">
-          {{ .Title }}
-        </a>
-      </li>
-    {{ end }}
-  </ul>
-</div>
-{{ end }}
-
-{{ define "sidebar-options" }}
-<div>
-  <h2 class="text-lg font-bold mb-4">Options</h2>
-  <ul class="space-y-2 text-sm">
-    <li><a href="#" class="text-blue-600 hover:underline">Back to List</a></li>
-    <li><a href="#" class="text-blue-600 hover:underline">Share</a></li>
-    <li><a href="#" class="text-blue-600 hover:underline">Print</a></li>
-  </ul>
-</div>
-{{ end }}

@@ -1,12 +1,19 @@
 {{ define "main" }}
 <div class="space-y-4">
-  <h1 class="text-2xl md:text-3xl font-bold mb-6">{{ .Title }}</h1>
+  <!-- <h1 class="text-2xl md:text-3xl font-bold mb-6">{{ .Title }}</h1> -->
   
   {{ range .Pages }}
     <article class="flex gap-4 p-4 bg-white border border-gray-300 rounded-lg hover:shadow-md transition-shadow">
       <!-- Thumbnail placeholder -->
       <div class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gray-300 rounded flex items-center justify-center">
         <span class="text-gray-600 text-2xl">✕</span>
+        <!-- <img
+            src="{{ . }}"
+            role="presentation"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            class="not-prose absolute inset-0 w-full h-full object-cover"> -->
       </div>
       
       <!-- Content -->
@@ -26,32 +33,5 @@
       </div>
     </article>
   {{ end }}
-</div>
-{{ end }}
-
-{{ define "sidebar-tags" }}
-<div>
-  <h2 class="text-lg font-bold mb-4">Tags</h2>
-  <ul class="space-y-2">
-    {{ $allTags := .Site.Taxonomies.tags }}
-    {{ range $tag, $pages := $allTags }}
-      <li>
-        <a href="{{ $.Site.BaseURL }}tags/{{ $tag | urlize }}/" class="text-blue-600 hover:underline text-sm">
-          {{ $tag }} ({{ len $pages }})
-        </a>
-      </li>
-    {{ end }}
-  </ul>
-</div>
-{{ end }}
-
-{{ define "sidebar-options" }}
-<div>
-  <h2 class="text-lg font-bold mb-4">Options</h2>
-  <ul class="space-y-2 text-sm">
-    <li><a href="#" class="text-blue-600 hover:underline">View All</a></li>
-    <li><a href="#" class="text-blue-600 hover:underline">Sort by Date</a></li>
-    <li><a href="#" class="text-blue-600 hover:underline">Filter</a></li>
-  </ul>
 </div>
 {{ end }}
