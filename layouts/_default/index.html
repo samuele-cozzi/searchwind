@@ -33,10 +33,11 @@
 <div>
   <h2 class="text-lg font-bold mb-4">Tags</h2>
   <ul class="space-y-2">
-    {{ range (.GetTerms "tags") }}
+    {{ $allTags := .Site.Taxonomies.tags }}
+    {{ range $tag, $pages := $allTags }}
       <li>
-        <a href="{{ .RelPermalink }}" class="text-blue-600 hover:underline text-sm">
-          {{ .Title }} ({{ .Count }})
+        <a href="{{ $.Site.BaseURL }}tags/{{ $tag | urlize }}/" class="text-blue-600 hover:underline text-sm">
+          {{ $tag }} ({{ len $pages }})
         </a>
       </li>
     {{ end }}

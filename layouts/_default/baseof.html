@@ -6,7 +6,38 @@
     <title>{{ .Title }}</title>
     <link href="/css/tailwind.css" rel="stylesheet">
   </head>
-  <body class="bg-gray-100 text-gray-900">
-    {{ block "main" . }}{{ end }}
+  <body class="bg-white text-gray-900 flex flex-col h-screen">
+    <!-- Main content container -->
+    <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+      <!-- Tags sidebar -->
+      <aside class="w-full md:w-48 bg-gray-50 border-b md:border-b-0 md:border-r border-gray-200 p-4 overflow-y-auto md:block">
+        {{ block "sidebar-tags" . }}{{ end }}
+      </aside>
+
+      <!-- Main content area -->
+      <main class="flex-1 overflow-y-auto p-4 md:p-6">
+        {{ block "main" . }}{{ end }}
+      </main>
+
+      <!-- Options sidebar -->
+      <aside class="w-full md:w-48 bg-gray-50 border-t md:border-t-0 md:border-l border-gray-200 p-4 overflow-y-auto hidden md:block">
+        {{ block "sidebar-options" . }}{{ end }}
+      </aside>
+    </div>
+
+    <!-- Search box footer -->
+    <footer class="bg-white border-t border-gray-200 p-4">
+      <div class="flex items-center gap-3 max-w-full">
+        <button class="flex-shrink-0 text-gray-600 hover:text-gray-900 font-semibold">Logo</button>
+        <input 
+          type="text" 
+          placeholder="SEARCHBOX" 
+          class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+        <button class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center">
+          <span class="text-gray-600">●</span>
+        </button>
+      </div>
+    </footer>
   </body>
 </html>

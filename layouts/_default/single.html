@@ -1,8 +1,54 @@
 {{ define "main" }}
-<main class="container mx-auto px-4 py-8">
-  <article class="prose">
-    <h1>{{ .Title }}</h1>
+<article class="max-w-3xl">
+  <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ .Title }}</h1>
+  
+  {{ if .Params.tags }}
+    <div class="flex flex-wrap gap-2 mb-6">
+      {{ range .Params.tags }}
+        <span class="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full">{{ . }}</span>
+      {{ end }}
+    </div>
+  {{ end }}
+
+  <div class="prose prose-sm md:prose max-w-none">
     {{ .Content }}
-  </article>
-</main>
+  </div>
+
+  <nav class="mt-8 pt-6 border-t border-gray-200">
+    <div class="flex justify-between">
+      {{ with .PrevInSection }}
+        <a href="{{ .Permalink }}" class="text-blue-600 hover:text-blue-800">&larr; {{ .Title }}</a>
+      {{ end }}
+      {{ with .NextInSection }}
+        <a href="{{ .Permalink }}" class="text-blue-600 hover:text-blue-800">{{ .Title }} &rarr;</a>
+      {{ end }}
+    </div>
+  </nav>
+</article>
+{{ end }}
+
+{{ define "sidebar-tags" }}
+<div>
+  <h2 class="text-lg font-bold mb-4">Tags</h2>
+  <ul class="space-y-2">
+    {{ range (.GetTerms "tags") }}
+      <li>
+        <a href="{{ .RelPermalink }}" class="text-blue-600 hover:underline text-sm">
+          {{ .Title }}
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
+
+{{ define "sidebar-options" }}
+<div>
+  <h2 class="text-lg font-bold mb-4">Options</h2>
+  <ul class="space-y-2 text-sm">
+    <li><a href="#" class="text-blue-600 hover:underline">Back to List</a></li>
+    <li><a href="#" class="text-blue-600 hover:underline">Share</a></li>
+    <li><a href="#" class="text-blue-600 hover:underline">Print</a></li>
+  </ul>
+</div>
 {{ end }}
