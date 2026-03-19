@@ -1,10 +1,10 @@
 <div>
-  <h2 class="text-lg font-bold mb-4">Tags</h2>
+  <h2 class=" font-bold mb-4 text-base">Tags</h2>
   <ul class="space-y-2">
     {{ $allTags := .Site.Taxonomies.tags }}
     {{ range $tag, $pages := $allTags }}
       <li>
-        <a href="{{ $.Site.BaseURL }}tags/{{ $tag | urlize }}/" class="text-blue-600 hover:underline text-sm">
+        <a href="{{ $.Site.BaseURL }}tags/{{ $tag | urlize }}/" class="text-primary hover:underline text-sm">
           {{ $tag }} ({{ len $pages }})
         </a>
       </li>

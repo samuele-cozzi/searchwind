@@ -2,8 +2,8 @@
   "name": "hugo-tailwind-theme",
   "version": "1.0.0",
   "scripts": {
-    "build:css": "tailwindcss -i ./css/tailwind.css -o ./static/css/tailwind.css",
-    "watch:css": "tailwindcss -i ./css/tailwind.css -o ./static/css/tailwind.css --watch"
+    "build:css": "tailwindcss -i ./css/tailwind.css -o ./assets/css/tailwind.css",
+    "watch:css": "tailwindcss -i ./css/tailwind.css -o ./assets/css/tailwind.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "^3.0.0",
