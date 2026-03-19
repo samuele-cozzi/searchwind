@@ -1,37 +1,82 @@
 {{ define "main" }}
+
+<div class="p-6 rounded-xl shadow bg-background-card transition">
+  <h2 class="text-2xl font-semibold text-primary mb-4">Buttons with Full States</h2>
+
+  <p class="text-muted mb-4">
+    These buttons support hover, active, focus, and outline colors — all based on your theme tokens.
+  </p>
+
+  <div class="space-x-3">
+
+    <!-- PRIMARY BUTTON -->
+    <button class="px-4 py-2 rounded text-base 
+                                      bg-primary hover:bg-primary-hover active:bg-primary-active
+                                      focus:outline-none focus:ring-2 focus:ring-primary-outline transition">
+      Primary
+    </button>
+
+    <!-- SECONDARY BUTTON -->
+    <button class="px-4 py-2 rounded text-base 
+                                      bg-secondary hover:bg-secondary-hover active:bg-secondary-active
+                                      focus:outline-none focus:ring-2 focus:ring-secondary-outline transition">
+      Secondary
+    </button>
+
+    <!-- ACCENT BUTTON -->
+    <button class="px-4 py-2 rounded text-base
+                                      bg-accent hover:bg-accent-hover active:bg-accent-active
+                                      focus:outline-none focus:ring-2 focus:ring-accent-outline transition">
+      Accent
+    </button>
+
+  </div>
+</div>
+
+<div class="p-6 rounded-xl shadow bg-background-card transition">
+  <h2 class="text-2xl font-semibold text-secondary mb-4">Text Colors</h2>
+
+  <p class="text-base">This is normal body text (automatic light/dark).</p>
+  <p class="text-muted">This is muted text for descriptions.</p>
+  <p class="text-primary">This text uses the primary color.</p>
+  <p class="text-secondary">This is secondary text.</p>
+  <p class="text-accent">This is accent text.</p>
+</div>
+
 <div class="space-y-4">
   <!-- <h1 class="text-2xl md:text-3xl font-bold mb-6">{{ .Title }}</h1> -->
-  
+
   {{ range .Pages }}
-    <article class="flex gap-4 p-4 bg-white border border-gray-300 rounded-lg hover:shadow-md transition-shadow">
-      <!-- Thumbnail placeholder -->
-      <div class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gray-300 rounded flex items-center justify-center">
-        <span class="text-gray-600 text-2xl">✕</span>
-        <!-- <img
+  <article
+    class="flex gap-4 p-4 bg-background-card border border-gray-300 rounded-lg hover:shadow-md transition-shadow">
+    <!-- Thumbnail placeholder -->
+    <div class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-gray-300 rounded flex items-center justify-center">
+      <span class="text-gray-600 text-2xl">✕</span>
+      <!-- <img
             src="{{ . }}"
             role="presentation"
             loading="lazy"
             decoding="async"
             fetchpriority="low"
             class="not-prose absolute inset-0 w-full h-full object-cover"> -->
-      </div>
-      
-      <!-- Content -->
-      <div class="flex-1">
-        <a href="{{ .RelPermalink }}" class="text-lg font-semibold text-gray-900 hover:text-blue-600 block mb-1">
-          {{ .Title }}
-        </a>
-        {{ if .Params.tags }}
-          <div class="flex flex-wrap gap-1">
-            {{ range .Params.tags }}
-              <span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">{{ . }}</span>
-            {{ end }}
-          </div>
-        {{ else }}
-          <p class="text-sm text-gray-600">tags</p>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-1">
+      <a href="{{ .RelPermalink }}" class="text-lg font-semibold text-gray-900 hover:text-blue-600 block mb-1">
+        {{ .Title }}
+      </a>
+      {{ if .Params.tags }}
+      <div class="flex flex-wrap gap-1">
+        {{ range .Params.tags }}
+        <span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">{{ . }}</span>
         {{ end }}
       </div>
-    </article>
+      {{ else }}
+      <p class="text-sm text-gray-600">tags</p>
+      {{ end }}
+    </div>
+  </article>
   {{ end }}
 </div>
 {{ end }}
