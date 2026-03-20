@@ -7,7 +7,8 @@
 
   <!-- Tailwind CDN -->
   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-   <link href="/css/tailwind.css" rel="stylesheet">
+  {{- $styles := resources.Get "css/searchwind.css" -}}
+  <link href={{ $styles.RelPermalink }} rel="stylesheet" />
   
   <!-- THEME VARIABLES -->
   <style>
@@ -354,58 +355,3 @@
 </html>
 
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ .Title }}</title>
-    <link href="/css/tailwind.css" rel="stylesheet">
-    <style>
-      .hidden {
-        display: none !important;
-      }
-    </style>
-  </head>
-  <body class="bg-white text-gray-900 flex flex-col h-screen">
-    
-    <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
-      
-      <aside class="w-full md:w-48 bg-gray-50 border-b md:border-b-0 md:border-r border-gray-200 p-4 overflow-y-auto md:block">
-        {{ partial "sidebar-tags" . }}
-      </aside>
-      
-        <main class="flex-1 overflow-y-auto p-4 md:p-6">
-          {{ block "main" . }}{{ end }}
-        </main>
-
-      
-      <aside id="sidebar-options" class="w-full md:w-48 bg-gray-50 border-t md:border-t-0 md:border-l border-gray-200 p-4 overflow-y-auto hidden md:block">
-        {{ partial "sidebar-options" . }}
-      </aside>
-    </div>
-
-    <footer class="bg-white border-t border-gray-200 p-4">
-      <div class="flex items-center gap-3 max-w-full">
-        <button class="flex-shrink-0 text-gray-600 hover:text-gray-900 font-semibold">Logo</button>
-        <input 
-          type="text" 
-          placeholder="{{ .Title }}" 
-          class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-        <button id="toggle-options" class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center cursor-pointer">
-          <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.89-2-2s.9-2 2-2 2 .89 2 2-.9 2-2 2zm7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65c-.04-.24-.25-.41-.5-.41h-4c-.25 0-.46.17-.49.41l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 9.5c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.63c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.39 1.06.73 1.69.98l.37 2.65c.05.24.25.41.5.41h4c.25 0 .46-.17.49-.41l.37-2.65c.63-.25 1.17-.59 1.69-.98l2.49 1c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.63z"/>
-          </svg>
-        </button>
-      </div>
-    </footer>
-
-    <script>
-      document.getElementById('toggle-options').addEventListener('click', function() {
-        const sidebar = document.getElementById('sidebar-options');
-        sidebar.classList.toggle('hidden');
-      });
-    </script>
-  </body>
-</html> -->
