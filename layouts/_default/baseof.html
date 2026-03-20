@@ -6,8 +6,8 @@
   <title>{{ .Title }}</title>
 
   <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- <link href="/css/tailwind.css" rel="stylesheet"> -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <link href="/css/tailwind.css" rel="stylesheet">
 
   <!-- THEME VARIABLES -->
   <style>
@@ -78,44 +78,44 @@
 
   <!-- TAILWIND CONFIG -->
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            /* Background */
-            background: "var(--color-bg)",
-            "background-card": "var(--color-bg-card)",
+    // tailwind.config = {
+    //   darkMode: 'class',
+    //   theme: {
+    //     extend: {
+    //       colors: {
+    //         /* Background */
+    //         background: "var(--color-bg)",
+    //         "background-card": "var(--color-bg-card)",
 
-            /* Primary */
-            primary: "var(--color-primary)",
-            "primary-hover": "var(--color-primary-hover)",
-            "primary-active": "var(--color-primary-active)",
-            "primary-outline": "var(--color-primary-outline)",
+    //         /* Primary */
+    //         primary: "var(--color-primary)",
+    //         "primary-hover": "var(--color-primary-hover)",
+    //         "primary-active": "var(--color-primary-active)",
+    //         "primary-outline": "var(--color-primary-outline)",
 
-            /* Secondary */
-            secondary: "var(--color-secondary)",
-            "secondary-hover": "var(--color-secondary-hover)",
-            "secondary-active": "var(--color-secondary-active)",
-            "secondary-outline": "var(--color-secondary-outline)",
+    //         /* Secondary */
+    //         secondary: "var(--color-secondary)",
+    //         "secondary-hover": "var(--color-secondary-hover)",
+    //         "secondary-active": "var(--color-secondary-active)",
+    //         "secondary-outline": "var(--color-secondary-outline)",
 
-            /* Accent */
-            accent: "var(--color-accent)",
-            "accent-hover": "var(--color-accent-hover)",
-            "accent-active": "var(--color-accent-active)",
-            "accent-outline": "var(--color-accent-outline)",
-          },
+    //         /* Accent */
+    //         accent: "var(--color-accent)",
+    //         "accent-hover": "var(--color-accent-hover)",
+    //         "accent-active": "var(--color-accent-active)",
+    //         "accent-outline": "var(--color-accent-outline)",
+    //       },
 
-          textColor: {
-            base: "var(--text-base)",
-            muted: "var(--text-muted)",
-            primary: "var(--text-primary)",
-            secondary: "var(--text-secondary)",
-            accent: "var(--text-accent)"
-          }
-        }
-      }
-    }
+    //       textColor: {
+    //         base: "var(--text-base)",
+    //         muted: "var(--text-muted)",
+    //         primary: "var(--text-primary)",
+    //         secondary: "var(--text-secondary)",
+    //         accent: "var(--text-accent)"
+    //       }
+    //     }
+    //   }
+    // }
   </script>
 
 </head>
@@ -145,8 +145,7 @@
             <header class="flex bg-background-card items-center justify-between px-6 py-3 absolute mx-auto inset-x-0 bottom-0">
 
                 <a href="/">
-                    <img
-                        src="https://img.freepik.com/vettori-gratuito/vettore-di-gradiente-del-logo-colorato-uccello_343694-1365.jpg?semt=ais_hybrid&w=35&q=80" />
+                  <div class="flex items-center justify-center">{{ partial "icon" .Site.Params.logo }}</div>
                 </a>
 
                 <nav id="menu"
@@ -154,12 +153,12 @@
                     <form id="globalSearch" class="w-full px-4 flex items-center justify-center" role="search"
                         aria-label="Global">
                         <div class="relative w-full">
-                            <label for="q" class="sr-only">Search</label>
+                            <label for="q" class="sr-only">{{ .Title }}</label>
                             <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-primary">
                                 {{ partial "icon" "search" }}
                             </span>
 
-                            <input id="q" name="q" type="search" autocomplete="off" placeholder="Search…" class="w-full rounded-full border border-secondary bg-background pl-10 pr-24 py-2.5
+                            <input id="q" name="q" type="search" autocomplete="off" placeholder={{ .Title }} class="w-full rounded-full border border-secondary bg-background pl-10 pr-24 py-2.5
                                     text-sm text-primary placeholder:text-primary
                                     focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" />
                         </div>
