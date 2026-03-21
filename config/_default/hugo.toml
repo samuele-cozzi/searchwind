@@ -1,2 +1,5 @@
 [params]
   logo = "home"
+
+  showCategoriesMenu = false
+  showTagsMenu = true

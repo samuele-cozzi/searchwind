@@ -76,49 +76,6 @@
       --text-accent: #FCD34D;
     }
   </style>
-
-  <!-- TAILWIND CONFIG -->
-  <script>
-    // tailwind.config = {
-    //   darkMode: 'class',
-    //   theme: {
-    //     extend: {
-    //       colors: {
-    //         /* Background */
-    //         background: "var(--color-bg)",
-    //         "background-card": "var(--color-bg-card)",
-
-    //         /* Primary */
-    //         primary: "var(--color-primary)",
-    //         "primary-hover": "var(--color-primary-hover)",
-    //         "primary-active": "var(--color-primary-active)",
-    //         "primary-outline": "var(--color-primary-outline)",
-
-    //         /* Secondary */
-    //         secondary: "var(--color-secondary)",
-    //         "secondary-hover": "var(--color-secondary-hover)",
-    //         "secondary-active": "var(--color-secondary-active)",
-    //         "secondary-outline": "var(--color-secondary-outline)",
-
-    //         /* Accent */
-    //         accent: "var(--color-accent)",
-    //         "accent-hover": "var(--color-accent-hover)",
-    //         "accent-active": "var(--color-accent-active)",
-    //         "accent-outline": "var(--color-accent-outline)",
-    //       },
-
-    //       textColor: {
-    //         base: "var(--text-base)",
-    //         muted: "var(--text-muted)",
-    //         primary: "var(--text-primary)",
-    //         secondary: "var(--text-secondary)",
-    //         accent: "var(--text-accent)"
-    //       }
-    //     }
-    //   }
-    // }
-  </script>
-
 </head>
 
 <body class="h-screen overflow-hidden bg-background-card">
@@ -126,17 +83,17 @@
     <div class="flex h-full">
 
         <!-- LEFT SIDEBAR -->
-        <aside id="leftSidebar" class="transition-all duration-300 w-80 md:block hidden p-3 overflow-y-auto">
-
+        <aside id="leftSidebar" class="transition-all duration-300 md:block hidden pl-3 pr-1 overflow-y-auto w-80">
             <div class="flex items-center justify-between p-3">
-                <span class="font-semibold text-lg text-base" id="leftTitle">{{ .Title }}</span>
-                <button id="openMenu" onclick="toggleLeft()">
+                <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
+                <button id="openMiniMenu">
                     <div class="flex items-center justify-center">
-                      {{ partial "icon" "bars" }}
+                    {{ partial "icon" "bars" }}
                     </div>
                 </button>
             </div>
 
+            {{ partial "sidebar-categories" . }}
             {{ partial "sidebar-tags" . }}
         </aside>
 
@@ -145,50 +102,11 @@
 
             <header class="flex bg-background-card items-center justify-between px-6 py-3 absolute mx-auto inset-x-0 bottom-0">
 
-                <a href="/">
-                  <div class="flex items-center justify-center">{{ partial "icon" .Site.Params.logo }}</div>
-                </a>
+                {{ partial "header/navbar-left" . }}
 
-                <nav id="menu"
-                    class="w-full max-md:overflow-hidden items-center justify-center backdrop-blur flex-col row flex">
-                    <form id="globalSearch" class="w-full px-4 flex items-center justify-center" role="search"
-                        aria-label="Global">
-                        <div class="relative w-full">
-                            <label for="q" class="sr-only">{{ .Title }}</label>
-                            <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-primary">
-                                {{ partial "icon" "search" }}
-                            </span>
+                {{ partial "header/navbar-center" . }}
 
-                            <input id="q" name="q" type="search" autocomplete="off" placeholder={{ .Title }} class="w-full rounded-full border border-secondary bg-background pl-10 pr-24 py-2.5
-                                    text-sm text-primary placeholder:text-primary
-                                    focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" />
-                        </div>
-                    </form>
-                </nav>
-
-                <div class="flex items-center space-x-4">
-                  <button id="openMenu" onclick="toggleLeftFull()">
-                        <div class="flex items-center justify-center">
-                          {{ partial "icon" "bars" }}
-                        </div>
-                    </button>
-                    <button
-                      id="appearance-switcher"
-                      aria-label="Dark mode switcher"
-                      class="bf-icon-color-hover">
-                      <div class="flex items-center justify-center dark:hidden">
-                        {{ partial "icon" "moon" }}
-                      </div>
-                      <div class="items-center justify-center hidden dark:flex">
-                        {{ partial "icon" "sun" }}
-                      </div>
-                    </button>
-                    <button id="openMenu" onclick="openDrawer()">
-                        <div class="flex items-center justify-center">
-                          {{ partial "icon" "settings" }}
-                        </div>
-                    </button>
-                </div>
+                {{ partial "header/navbar-right" . }}
 
             </header>
 
@@ -217,45 +135,47 @@
 
     </div>
 
-    
     <script>
-      // DARK MODE SCRIPT 
-      const root = document.documentElement;
-      const toggle = document.getElementById("appearance-switcher");
+        // DARK MODE SCRIPT 
+        const root = document.documentElement;
+        const toggle_dark = document.getElementById("appearance-switcher");
 
-      toggle.addEventListener("click", () => {
-        root.classList.toggle("dark");
-        localStorage.setItem("darkMode", root.classList.contains("dark") ? "true" : "false");
-      });
+        toggle_dark.addEventListener("click", () => {
+            root.classList.toggle("dark");
+            localStorage.setItem("darkMode", root.classList.contains("dark") ? "true" : "false");
+        });
 
-      /* Load stored preference */
-      if (localStorage.getItem("darkMode") === "true") {
-        root.classList.add("dark");
-      }
-
-      // LEFT SIDEBAR TOGGLE
-        let collapsedLeft = false;
-
-        function toggleLeft() {
-            const sb = document.getElementById("leftSidebar");
-            const labels = document.querySelectorAll(".lbl-left");
-            const title = document.getElementById("leftTitle");
-
-            collapsedLeft = !collapsedLeft;
-
-            sb.style.width = collapsedLeft ? "70px" : "256px";
-            labels.forEach(l => l.style.display = collapsedLeft ? "none" : "inline");
-            title.style.display = collapsedLeft ? "none" : "inline";
+        /* Load stored preference */
+        if (localStorage.getItem("darkMode") === "true") {
+            root.classList.add("dark");
         }
 
-        function toggleLeftFull() {
-            const sb = document.getElementById("leftSidebar");
-            //const labels = document.querySelectorAll(".lbl");
-            const isHidden = sb.style.width === "0px";
+        // LEFT SIDEBAR TOGGLE
+        const toggle_left = document.getElementById("openMenu");
+        const toggle_mini_left = document.getElementById("openMiniMenu");
+        const sb = document.getElementById("leftSidebar");
 
-            sb.style.width = isHidden ? "320px" : "0px";
-            if (isHidden) sb.classList.remove("hidden");
-            else sb.classList.add("hidden");
+        toggle_left.addEventListener("click", () => {
+            sb.classList.toggle("md:block");
+            localStorage.setItem("leftSidebar", sb.classList.contains("md:block") ? "open" : "close");
+        });
+
+        toggle_mini_left.addEventListener("click", () => {
+            sb.classList.toggle("w-80");
+
+            const text = document.querySelectorAll(".menu-text");
+            text.forEach(t => t.classList.toggle("hidden"));
+
+            localStorage.setItem("leftSidebar", sb.classList.contains("w-80") ? "open" : "mini");
+        });
+
+        /* Load stored preference */
+        if (localStorage.getItem("leftSidebar") === "close") {
+            sb.classList.remove("md:block");
+        } if (localStorage.getItem("leftSidebar") === "mini") {
+            sb.classList.remove("w-80");
+            const text = document.querySelectorAll(".menu-text");
+            text.forEach(t => t.classList.toggle("hidden"));
         }
 
         /* === Drawer logic === */

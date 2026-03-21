@@ -1,0 +1,15 @@
+{{ if .Site.Params.showCategoriesMenu }}
+<div>
+  <h2 class=" font-bold mb-4 text-base">Categories</h2>
+  <ul class="space-y-2">
+    {{ $allCategories := .Site.Taxonomies.categories }}
+    {{ range $category, $pages := $allCategories }}
+      <li>
+        <a href="{{ $.Site.BaseURL }}categories/{{ $category | urlize }}/" class="text-primary hover:underline text-sm">
+          {{ $category }} ({{ len $pages }})
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
