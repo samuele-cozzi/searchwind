@@ -1,9 +1,18 @@
 <div class="flex items-center space-x-4">
-    <button id="openMenu" class="hidden md:block">
+    {{ if eq .Site.Params.usersettings.sidebar "left" }}
+    <button id="openMenuLeft" class="hidden md:block">
         <div class="flex items-center justify-center">
             {{ partial "icon" "sidebar-left" }}
         </div>
     </button>
+    {{ end }}
+    {{ if eq .Site.Params.usersettings.sidebar "right" }}
+    <button id="openMenuRight" class="hidden md:block">
+        <div class="flex items-center justify-center">
+            {{ partial "icon" "sidebar-right" }}
+        </div>
+    </button>
+    {{ end }}
     {{ if .Site.Params.showCategoriesMenu }}
     <button id="openCategories" class="md:hidden">
         <a href="/categories" class="flex items-center justify-center">

@@ -1,0 +1,7 @@
+    logo = "home"
+
+    showCategoriesMenu = false
+    showTagsMenu = true
+
+    [usersettings]
+        sidebar = "right" # left/right

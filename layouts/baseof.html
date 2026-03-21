@@ -83,10 +83,11 @@
     <div class="flex h-full">
 
         <!-- LEFT SIDEBAR -->
+        {{ if eq .Site.Params.usersettings.sidebar "left" }}
         <aside id="leftSidebar" class="transition-all duration-300 md:block hidden pl-3 pr-1 overflow-y-auto w-80">
             <div class="flex items-center justify-between p-3">
                 <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
-                <button id="openMiniMenu">
+                <button id="openMiniMenuLeft">
                     <div class="flex items-center justify-center">
                     {{ partial "icon" "bars" }}
                     </div>
@@ -96,6 +97,7 @@
             {{ partial "sidebar-categories" . }}
             {{ partial "sidebar-tags" . }}
         </aside>
+        {{ end }}
 
         <!-- MAIN CONTENT -->
         <div class="flex-1 flex flex-col ">
@@ -121,6 +123,23 @@
 
 
         </div>
+
+        <!-- RIGHT SIDEBAR -->
+        {{ if eq .Site.Params.usersettings.sidebar "right" }}
+        <aside id="rightSidebar" class="transition-all duration-300 md:block hidden pl-1 pr-3 overflow-y-auto w-80">
+            <div class="flex items-center justify-between p-3">
+                <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
+                <button id="openMiniMenuRight">
+                    <div class="flex items-center justify-center">
+                    {{ partial "icon" "bars" }}
+                    </div>
+                </button>
+            </div>
+
+            {{ partial "sidebar-categories" . }}
+            {{ partial "sidebar-tags" . }}
+        </aside>
+        {{ end }}
 
         <!-- Drawer Backdrop -->
         <div id="drawerBackdrop" class="fixed inset-0 bg-black/40 z-40 hidden" aria-hidden="true"></div>
@@ -150,30 +169,50 @@
             root.classList.add("dark");
         }
 
-        // LEFT SIDEBAR TOGGLE
-        const toggle_left = document.getElementById("openMenu");
-        const toggle_mini_left = document.getElementById("openMiniMenu");
-        const sb = document.getElementById("leftSidebar");
+        // SIDEBAR TOGGLE
+        const toggle_left = document.getElementById("openMenuLeft");
+        const toggle_mini_left = document.getElementById("openMiniMenuLeft");
+        const sb_left = document.getElementById("leftSidebar");
 
-        toggle_left.addEventListener("click", () => {
-            sb.classList.toggle("md:block");
-            localStorage.setItem("leftSidebar", sb.classList.contains("md:block") ? "open" : "close");
+        const toggle_right = document.getElementById("openMenuRight");
+        const toggle_mini_right = document.getElementById("openMiniMenuRight");
+        const sb_right = document.getElementById("rightSidebar");
+
+        toggle_left && toggle_left.addEventListener("click", () => {
+            sb_left.classList.toggle("md:block");
+            localStorage.setItem("leftSidebar", sb_left.classList.contains("md:block") ? "open" : "close");
         });
 
-        toggle_mini_left.addEventListener("click", () => {
-            sb.classList.toggle("w-80");
+        toggle_mini_left && toggle_mini_left.addEventListener("click", () => {
+            sb_left.classList.toggle("w-80");
 
             const text = document.querySelectorAll(".menu-text");
             text.forEach(t => t.classList.toggle("hidden"));
 
-            localStorage.setItem("leftSidebar", sb.classList.contains("w-80") ? "open" : "mini");
+            localStorage.setItem("sidebar", sb_left.classList.contains("w-80") ? "open" : "mini");
+        });
+
+        toggle_right && toggle_right.addEventListener("click", () => {
+            sb_right.classList.toggle("md:block");
+            localStorage.setItem("sidebar", sb_right.classList.contains("md:block") ? "open" : "close");
+        });
+
+        toggle_mini_right && toggle_mini_right.addEventListener("click", () => {
+            sb_right.classList.toggle("w-80");
+
+            const text = document.querySelectorAll(".menu-text");
+            text.forEach(t => t.classList.toggle("hidden"));
+
+            localStorage.setItem("sidebar", sb_right.classList.contains("w-80") ? "open" : "mini");
         });
 
         /* Load stored preference */
-        if (localStorage.getItem("leftSidebar") === "close") {
-            sb.classList.remove("md:block");
-        } if (localStorage.getItem("leftSidebar") === "mini") {
-            sb.classList.remove("w-80");
+        if (localStorage.getItem("sidebar") === "close") {
+            sb_left && sb_left.classList.remove("md:block");
+            sb_right && sb_right.classList.remove("md:block");
+        } if (localStorage.getItem("sidebar") === "mini") {
+            sb_left &&sb_left.classList.remove("w-80");
+            sb_right && sb_right.classList.remove("w-80");
             const text = document.querySelectorAll(".menu-text");
             text.forEach(t => t.classList.toggle("hidden"));
         }
