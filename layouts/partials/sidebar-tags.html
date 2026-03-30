@@ -1,13 +1,15 @@
 {{ if .Site.Params.showTagsMenu }}
 <div>
-  <div class="flex items-center p-3">
-      <a href="/tags">
+  <!--<div class="flex items-center p-3">
+       <a href="/tags">
           <div class="flex items-center justify-center">
           {{ partial "icon" "tag" }}
           </div>
       </a>
-      <span class="menu-text font-semibold text-base pl-3">Tags</span>
-  </div>
+      <span class="menu-text font-semibold text-base pl-3">TAGS</span>
+  </div>-->
+
+  <div class="menu-text font-bold mt-3 p-3 text-base">TAGS</div>
   
   <ul class="menu-text space-y-2 p-3">
     {{ $allTags := .Site.Taxonomies.tags }}

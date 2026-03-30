@@ -1,4 +1,10 @@
+[params]
+    logo = "home"
 
-  
+    showCategoriesMenu = false
+    showTagsMenu = true
+
+    [params.usersettings]
+        sidebar = "left" # left/right 
 
     

@@ -1,43 +1,14 @@
 <div class="flex items-center space-x-4">
+    <button id="openMenu" class="hidden md:block">
     {{ if eq .Site.Params.usersettings.sidebar "left" }}
-    <button id="openMenuLeft" class="hidden md:block">
         <div class="flex items-center justify-center">
             {{ partial "icon" "sidebar-left" }}
         </div>
-    </button>
     {{ end }}
     {{ if eq .Site.Params.usersettings.sidebar "right" }}
-    <button id="openMenuRight" class="hidden md:block">
         <div class="flex items-center justify-center">
             {{ partial "icon" "sidebar-right" }}
         </div>
-    </button>
     {{ end }}
-    {{ if .Site.Params.showCategoriesMenu }}
-    <button id="openCategories" class="md:hidden">
-        <a href="/categories" class="flex items-center justify-center">
-            {{ partial "icon" "categories" }}
-        </a>
-    </button>
-    {{ end }}
-    {{ if .Site.Params.showTagsMenu }}
-    <button id="openTags" class="md:hidden">
-        <a href="/tags" class="flex items-center justify-center">
-            {{ partial "icon" "tag" }}
-        </a>
-    </button>
-    {{ end }}
-    <button id="appearance-switcher" aria-label="Dark mode switcher" class="bf-icon-color-hover">
-        <div class="flex items-center justify-center dark:hidden">
-            {{ partial "icon" "moon" }}
-        </div>
-        <div class="items-center justify-center hidden dark:flex">
-            {{ partial "icon" "sun" }}
-        </div>
-    </button>
-    <button id="openSettings" onclick="openDrawer()">
-        <div class="flex items-center justify-center">
-            {{ partial "icon" "settings" }}
-        </div>
     </button>
 </div>

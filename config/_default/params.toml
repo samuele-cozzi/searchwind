@@ -1,7 +1,12 @@
-    logo = "home"
+#    logo = "home"
 
-    showCategoriesMenu = false
-    showTagsMenu = true
+#    showCategoriesMenu = false
+#    showTagsMenu = true
 
-    [usersettings]
-        sidebar = "right" # left/right
+#    [usersettings]
+#        sidebar = "right" # left/right
+
+    [colors]
+        [colors.light]
+            bg = "#f4cccc"
+            bg_card = "#FFFFFF"

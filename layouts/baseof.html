@@ -32,8 +32,8 @@
       --color-accent-outline: #FCD34D;
 
       /* Backgrounds */
-      --color-bg: #f4cccc;
-      --color-bg-card: #FFFFFF;
+      --color-bg: {{ .Site.Params.colors.light.bg  }};
+      --color-bg-card: {{ .Site.Params.colors.light.bg_card }};
 
       /* Text Colors */
       --text-base: #111827;   /* gray-900 */
@@ -84,18 +84,22 @@
 
         <!-- LEFT SIDEBAR -->
         {{ if eq .Site.Params.usersettings.sidebar "left" }}
-        <aside id="leftSidebar" class="transition-all duration-300 md:block hidden pl-3 pr-1 overflow-y-auto w-80">
+        <aside id="sidebar" class="transition-all duration-300 md:block hidden pl-3 pr-1 overflow-y-auto w-80">
             <div class="flex items-center justify-between p-3">
                 <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
-                <button id="openMiniMenuLeft">
+                <button id="openMiniMenu">
                     <div class="flex items-center justify-center">
                     {{ partial "icon" "bars" }}
                     </div>
                 </button>
             </div>
 
+            {{ partial "header/navbar-buttons" . }}
+
             {{ partial "sidebar-categories" . }}
+
             {{ partial "sidebar-tags" . }}
+
         </aside>
         {{ end }}
 
@@ -126,17 +130,20 @@
 
         <!-- RIGHT SIDEBAR -->
         {{ if eq .Site.Params.usersettings.sidebar "right" }}
-        <aside id="rightSidebar" class="transition-all duration-300 md:block hidden pl-1 pr-3 overflow-y-auto w-80">
+        <aside id="sidebar" class="transition-all duration-300 md:block hidden pl-1 pr-3 overflow-y-auto w-80">
             <div class="flex items-center justify-between p-3">
                 <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
-                <button id="openMiniMenuRight">
+                <button id="openMiniMenu">
                     <div class="flex items-center justify-center">
                     {{ partial "icon" "bars" }}
                     </div>
                 </button>
             </div>
 
+            {{ partial "header/navbar-buttons" . }}
+
             {{ partial "sidebar-categories" . }}
+
             {{ partial "sidebar-tags" . }}
         </aside>
         {{ end }}
@@ -170,49 +177,32 @@
         }
 
         // SIDEBAR TOGGLE
-        const toggle_left = document.getElementById("openMenuLeft");
-        const toggle_mini_left = document.getElementById("openMiniMenuLeft");
-        const sb_left = document.getElementById("leftSidebar");
+        const toggle_sidebar = document.getElementById("openMenu");
+        const toggle_mini = document.getElementById("openMiniMenu");
+        const sidebar = document.getElementById("sidebar");
+        const buttons = document.getElementById("navbar-buttons");
 
-        const toggle_right = document.getElementById("openMenuRight");
-        const toggle_mini_right = document.getElementById("openMiniMenuRight");
-        const sb_right = document.getElementById("rightSidebar");
-
-        toggle_left && toggle_left.addEventListener("click", () => {
-            sb_left.classList.toggle("md:block");
-            localStorage.setItem("leftSidebar", sb_left.classList.contains("md:block") ? "open" : "close");
+        toggle_sidebar && toggle_sidebar.addEventListener("click", () => {
+            sidebar.classList.toggle("md:block");
+            localStorage.setItem("leftSidebar", sidebar.classList.contains("md:block") ? "open" : "close");
         });
 
-        toggle_mini_left && toggle_mini_left.addEventListener("click", () => {
-            sb_left.classList.toggle("w-80");
+        toggle_mini && toggle_mini.addEventListener("click", () => {
+            sidebar.classList.toggle("w-80");
+            buttons.classList.toggle("grid");
 
             const text = document.querySelectorAll(".menu-text");
             text.forEach(t => t.classList.toggle("hidden"));
 
-            localStorage.setItem("sidebar", sb_left.classList.contains("w-80") ? "open" : "mini");
-        });
-
-        toggle_right && toggle_right.addEventListener("click", () => {
-            sb_right.classList.toggle("md:block");
-            localStorage.setItem("sidebar", sb_right.classList.contains("md:block") ? "open" : "close");
-        });
-
-        toggle_mini_right && toggle_mini_right.addEventListener("click", () => {
-            sb_right.classList.toggle("w-80");
-
-            const text = document.querySelectorAll(".menu-text");
-            text.forEach(t => t.classList.toggle("hidden"));
-
-            localStorage.setItem("sidebar", sb_right.classList.contains("w-80") ? "open" : "mini");
+            localStorage.setItem("sidebar", sidebar.classList.contains("w-80") ? "open" : "mini");
         });
 
         /* Load stored preference */
         if (localStorage.getItem("sidebar") === "close") {
-            sb_left && sb_left.classList.remove("md:block");
-            sb_right && sb_right.classList.remove("md:block");
+            sidebar && sidebar.classList.remove("md:block");
         } if (localStorage.getItem("sidebar") === "mini") {
-            sb_left &&sb_left.classList.remove("w-80");
-            sb_right && sb_right.classList.remove("w-80");
+            sidebar && sidebar.classList.remove("w-80");
+            buttons.classList.add("grid");
             const text = document.querySelectorAll(".menu-text");
             text.forEach(t => t.classList.toggle("hidden"));
         }

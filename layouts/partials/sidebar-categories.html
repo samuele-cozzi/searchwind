@@ -1,7 +1,9 @@
 {{ if .Site.Params.showCategoriesMenu }}
 <div>
-  <h2 class=" font-bold mb-4 text-base">Categories</h2>
-  <ul class="space-y-2">
+  
+  <div class="menu-text font-bold mt-3 p-3 text-base">CATEGORIES</div>
+
+  <ul class="space-y-2"></ul>
     {{ $allCategories := .Site.Taxonomies.categories }}
     {{ range $category, $pages := $allCategories }}
       <li>

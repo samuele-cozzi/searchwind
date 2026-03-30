@@ -1,0 +1,29 @@
+<div id="navbar-buttons" class="flex">    
+    {{ if .Site.Params.showCategoriesMenu }}
+    <button id="openCategories" class="p-3 w-full">
+        <a href="/categories" class="flex items-center justify-center">
+            {{ partial "icon" "categories" }}
+        </a>
+    </button>
+    {{ end }}
+    {{ if .Site.Params.showTagsMenu }}
+    <button id="openTags" class="p-3 w-full">
+        <a href="/tags" class="flex items-center justify-center">
+            {{ partial "icon" "tag" }}
+        </a>
+    </button>
+    {{ end }}
+    <button id="appearance-switcher" aria-label="Dark mode switcher" class="p-3 w-full">
+        <div class="flex items-center justify-center dark:hidden">
+            {{ partial "icon" "moon" }}
+        </div>
+        <div class="items-center justify-center hidden dark:flex w-full">
+            {{ partial "icon" "sun" }}
+        </div>
+    </button>
+    <button id="openSettings" onclick="openDrawer()" class="p-3 w-full">
+        <div class="flex items-center justify-center">
+            {{ partial "icon" "settings" }}
+        </div>
+    </button>
+</div>
