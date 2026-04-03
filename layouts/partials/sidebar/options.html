@@ -1,0 +1,10 @@
+<div class="flex h-full flex-col">
+    <button id="appearance-switcher" aria-label="Dark mode switcher" class="p-3 w-full">
+        <div class="flex items-center justify-center dark:hidden">
+            {{ partial "icon" "moon" }}
+        </div>
+        <div class="items-center justify-center hidden dark:flex w-full">
+            {{ partial "icon" "sun" }}
+        </div>
+    </button>
+</div>

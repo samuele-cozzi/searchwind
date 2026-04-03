@@ -13,15 +13,14 @@
         </a>
     </button>
     {{ end }}
-    <button id="appearance-switcher" aria-label="Dark mode switcher" class="p-3 w-full">
-        <div class="flex items-center justify-center dark:hidden">
-            {{ partial "icon" "moon" }}
-        </div>
-        <div class="items-center justify-center hidden dark:flex w-full">
-            {{ partial "icon" "sun" }}
+
+    <button id="openSearch" class="p-3 w-full">
+        <div class="flex items-center justify-center">
+            {{ partial "icon" "search" }}
         </div>
     </button>
-    <button id="openSettings" onclick="openDrawer()" class="p-3 w-full">
+    
+    <button id="openSettings" class="p-3 w-full">
         <div class="flex items-center justify-center">
             {{ partial "icon" "settings" }}
         </div>

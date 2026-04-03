@@ -1,81 +1,98 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ .Title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }}</title>
 
-  <!-- Tailwind CDN -->
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  {{- $styles := resources.Get "css/searchwind.css" -}}
-  <link href={{ $styles.RelPermalink }} rel="stylesheet" />
-  
-  <!-- THEME VARIABLES -->
-  <style>
-    :root {
-      /* Primary */
-      --color-primary: #2bf124;
-      --color-primary-hover: #0dd270;
-      --color-primary-active: #38ca49;
-      --color-primary-outline: #A5B4FC;
+    <!-- Tailwind CDN -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    {{- $styles := resources.Get "css/searchwind.css" -}}
+    <link href={{ $styles.RelPermalink }} rel="stylesheet" />
+    
+    <!-- THEME VARIABLES -->
+    <style>
+        :root {
+        /* Primary */
+        --color-primary: #2bf124;
+        --color-primary-hover: #0dd270;
+        --color-primary-active: #38ca49;
+        --color-primary-outline: #A5B4FC;
 
-      /* Secondary */
-      --color-secondary: #38BDF8;
-      --color-secondary-hover: #0EA5E9;
-      --color-secondary-active: #0284C7;
-      --color-secondary-outline: #7DD3FC;
+        /* Secondary */
+        --color-secondary: #38BDF8;
+        --color-secondary-hover: #0EA5E9;
+        --color-secondary-active: #0284C7;
+        --color-secondary-outline: #7DD3FC;
 
-      /* Accent */
-      --color-accent: #FBBF24;
-      --color-accent-hover: #F59E0B;
-      --color-accent-active: #D97706;
-      --color-accent-outline: #FCD34D;
+        /* Accent */
+        --color-accent: #FBBF24;
+        --color-accent-hover: #F59E0B;
+        --color-accent-active: #D97706;
+        --color-accent-outline: #FCD34D;
 
-      /* Backgrounds */
-      --color-bg: {{ .Site.Params.colors.light.bg  }};
-      --color-bg-card: {{ .Site.Params.colors.light.bg_card }};
+        /* Backgrounds */
+        --color-bg: {{ .Site.Params.colors.light.bg  }};
+        --color-bg-card: {{ .Site.Params.colors.light.bg_card }};
 
-      /* Text Colors */
-      --text-base: #111827;   /* gray-900 */
-      --text-muted: #4B5563;  /* gray-600 */
+        /* Text Colors */
+        --text-base: #111827;   /* gray-900 */
+        --text-muted: #4B5563;  /* gray-600 */
 
-      --text-primary: #1407cf;
-      --text-secondary: #0C4A6E;
-      --text-accent: #92400E;
-    }
+        --text-primary: #1407cf;
+        --text-secondary: #0C4A6E;
+        --text-accent: #92400E;
+        }
 
-    .dark {
-      /* Primary */
-      --color-primary: #3730A3;
-      --color-primary-hover: #312E81;
-      --color-primary-active: #1E1B4B;
-      --color-primary-outline: #4C51BF;
+        .dark {
+        /* Primary */
+        --color-primary: #3730A3;
+        --color-primary-hover: #312E81;
+        --color-primary-active: #1E1B4B;
+        --color-primary-outline: #4C51BF;
 
-      /* Secondary */
-      --color-secondary: #075985;
-      --color-secondary-hover: #0C4A6E;
-      --color-secondary-active: #082F49;
-      --color-secondary-outline: #38BDF8;
+        /* Secondary */
+        --color-secondary: #075985;
+        --color-secondary-hover: #0C4A6E;
+        --color-secondary-active: #082F49;
+        --color-secondary-outline: #38BDF8;
 
-      /* Accent */
-      --color-accent: #B45309;
-      --color-accent-hover: #92400E;
-      --color-accent-active: #78350F;
-      --color-accent-outline: #F59E0B;
+        /* Accent */
+        --color-accent: #B45309;
+        --color-accent-hover: #92400E;
+        --color-accent-active: #78350F;
+        --color-accent-outline: #F59E0B;
 
-      /* Backgrounds */
-      --color-bg: #1F2937;
-      --color-bg-card: #111827;
+        /* Backgrounds */
+        --color-bg: #1F2937;
+        --color-bg-card: #111827;
 
-      /* Text Colors */
-      --text-base: #E5E7EB;   /* gray-200 */
-      --text-muted: #9CA3AF;  /* gray-400 */
+        /* Text Colors */
+        --text-base: #E5E7EB;   /* gray-200 */
+        --text-muted: #9CA3AF;  /* gray-400 */
 
-      --text-primary: #A5B4FC;
-      --text-secondary: #7DD3FC;
-      --text-accent: #FCD34D;
-    }
-  </style>
+        --text-primary: #A5B4FC;
+        --text-secondary: #7DD3FC;
+        --text-accent: #FCD34D;
+        }
+    </style>
+
+    <!-- InstantSearch.js -->
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.92.0/dist/instantsearch.production.min.js" integrity="sha256-UerI9i8jTgE4HrbE1SeOpm9Tyd297GmAagU0NV8JQqU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.12.0/themes/reset-min.css" integrity="sha256-MetkRItMiXM7wjU0awrA13/5UeKtcW3cyFfPh7ZJbOM=" crossorigin="anonymous">
+
+    <!-- Algolia InstantSearch -->
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4"></script>
+
+    <!-- Meilisearch InstantSearch -->
+    <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch/dist/instant-meilisearch.umd.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch@0.14.4/dist/instant-meilisearch.umd.js"></script> -->
+
+    <!-- Typesense InstantSearch -->
+    <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
+
+    {{- $styles := resources.Get "scripts/searchwind.js" -}}
+    <script src={{ $styles.RelPermalink }} ></script>
 </head>
 
 <body class="h-screen overflow-hidden bg-background-card">
@@ -96,9 +113,19 @@
 
             {{ partial "header/navbar-buttons" . }}
 
-            {{ partial "sidebar-categories" . }}
+            <div id="sidebar-facets" class="menu-text">
+                {{ partial "sidebar/categories" . }}
 
-            {{ partial "sidebar-tags" . }}
+                {{ partial "sidebar/tags" . }}
+            </div>
+
+            <div id="sidebar-options" class="hidden menu-text">
+                {{ partial "sidebar/options" . }}
+            </div>
+
+            <div id="sidebar-search" class="hidden menu-text">
+                {{ partial "sidebar/search" . }}
+            </div>
 
         </aside>
         {{ end }}
@@ -142,162 +169,27 @@
 
             {{ partial "header/navbar-buttons" . }}
 
-            {{ partial "sidebar-categories" . }}
+            <div id="sidebar-facets" class="menu-text">
+                {{ partial "sidebar/categories" . }}
 
-            {{ partial "sidebar-tags" . }}
+                {{ partial "sidebar/tags" . }}
+            </div>
+
+            <div id="sidebar-options" class="hidden menu-text">
+                {{ partial "sidebar/options" . }}
+            </div>
+
+            <div id="sidebar-search" class="hidden menu-text">
+                {{ partial "sidebar/search" . }}
+            </div>
+
         </aside>
         {{ end }}
-
-        <!-- Drawer Backdrop -->
-        <div id="drawerBackdrop" class="fixed inset-0 bg-black/40 z-40 hidden" aria-hidden="true"></div>
-
-        <!-- Drawer Panel -->
-        <aside id="drawerPanel" class="fixed inset-y-0 right-0 z-50 w-full max-w-md transform translate-x-full
-                    bg-background shadow-2xl transition-transform duration-300 ease-out
-                    rounded-l-2xl focus:outline-none hidden" role="dialog" aria-modal="true"
-            aria-labelledby="drawerTitle" aria-describedby="drawerDesc">
-            {{ partial "sidebar-options" . }}
-        </aside>
 
     </div>
 
     <script>
-        // DARK MODE SCRIPT 
-        const root = document.documentElement;
-        const toggle_dark = document.getElementById("appearance-switcher");
-
-        toggle_dark.addEventListener("click", () => {
-            root.classList.toggle("dark");
-            localStorage.setItem("darkMode", root.classList.contains("dark") ? "true" : "false");
-        });
-
-        /* Load stored preference */
-        if (localStorage.getItem("darkMode") === "true") {
-            root.classList.add("dark");
-        }
-
-        // SIDEBAR TOGGLE
-        const toggle_sidebar = document.getElementById("openMenu");
-        const toggle_mini = document.getElementById("openMiniMenu");
-        const sidebar = document.getElementById("sidebar");
-        const buttons = document.getElementById("navbar-buttons");
-
-        toggle_sidebar && toggle_sidebar.addEventListener("click", () => {
-            sidebar.classList.toggle("md:block");
-            localStorage.setItem("leftSidebar", sidebar.classList.contains("md:block") ? "open" : "close");
-        });
-
-        toggle_mini && toggle_mini.addEventListener("click", () => {
-            sidebar.classList.toggle("w-80");
-            buttons.classList.toggle("grid");
-
-            const text = document.querySelectorAll(".menu-text");
-            text.forEach(t => t.classList.toggle("hidden"));
-
-            localStorage.setItem("sidebar", sidebar.classList.contains("w-80") ? "open" : "mini");
-        });
-
-        /* Load stored preference */
-        if (localStorage.getItem("sidebar") === "close") {
-            sidebar && sidebar.classList.remove("md:block");
-        } if (localStorage.getItem("sidebar") === "mini") {
-            sidebar && sidebar.classList.remove("w-80");
-            buttons.classList.add("grid");
-            const text = document.querySelectorAll(".menu-text");
-            text.forEach(t => t.classList.toggle("hidden"));
-        }
-
-        /* === Drawer logic === */
-        const drawerPanel = document.getElementById('drawerPanel');
-        const drawerBackdrop = document.getElementById('drawerBackdrop');
-
-        let lastFocusedElement = null;
-
-        function getFocusable(container) {
-            return Array.from(container.querySelectorAll(
-                'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-            ));
-        }
-
-        function openDrawer() {
-            lastFocusedElement = document.activeElement;
-
-            // Show elements
-            drawerBackdrop.classList.remove('hidden');
-            drawerPanel.classList.remove('hidden');
-
-            // Trigger slide-in
-            requestAnimationFrame(() => {
-                drawerPanel.classList.remove('translate-x-full');
-            });
-
-            // Accessibility
-            drawerPanel.setAttribute('aria-hidden', 'false');
-            drawerBackdrop.setAttribute('aria-hidden', 'false');
-
-            // Focus first focusable element
-            const focusables = getFocusable(drawerPanel);
-            if (focusables.length) focusables[0].focus();
-
-            // ESC + focus trap
-            document.addEventListener('keydown', handleDrawerKeydown);
-            drawerBackdrop.addEventListener('click', closeDrawer, { once: true });
-        }
-
-        function closeDrawer() {
-            // Slide out
-            drawerPanel.classList.add('translate-x-full');
-
-            drawerPanel.setAttribute('aria-hidden', 'true');
-            drawerBackdrop.setAttribute('aria-hidden', 'true');
-
-            // After transition, hide
-            const onEnd = () => {
-                drawerPanel.classList.add('hidden');
-                drawerBackdrop.classList.add('hidden');
-                drawerPanel.removeEventListener('transitionend', onEnd);
-            };
-            drawerPanel.addEventListener('transitionend', onEnd);
-
-            // Remove listeners
-            document.removeEventListener('keydown', handleDrawerKeydown);
-
-            // Restore focus
-            if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-                lastFocusedElement.focus();
-            }
-        }
-
-        function toggleDrawer() {
-            if (drawerPanel.classList.contains('hidden') || drawerPanel.classList.contains('translate-x-full')) {
-                openDrawer();
-            } else {
-                closeDrawer();
-            }
-        }
-
-        function handleDrawerKeydown(e) {
-            if (e.key === 'Escape') {
-                e.preventDefault();
-                closeDrawer();
-                return;
-            }
-            if (e.key === 'Tab') {
-                const focusables = getFocusable(drawerPanel);
-                if (!focusables.length) return;
-
-                const first = focusables[0];
-                const last = focusables[focusables.length - 1];
-
-                if (e.shiftKey && document.activeElement === first) {
-                    e.preventDefault();
-                    last.focus();
-                } else if (!e.shiftKey && document.activeElement === last) {
-                    e.preventDefault();
-                    first.focus();
-                }
-            }
-        }
+        
     </script>
 
 </body>
