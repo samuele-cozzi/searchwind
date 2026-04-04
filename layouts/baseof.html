@@ -119,7 +119,7 @@
                 {{ partial "sidebar/tags" . }}
             </div>
 
-            <div id="sidebar-options" class="hidden menu-text">
+            <div id="sidebar-options" class="hidden">
                 {{ partial "sidebar/options" . }}
             </div>
 
@@ -131,7 +131,7 @@
         {{ end }}
 
         <!-- MAIN CONTENT -->
-        <div class="flex-1 flex flex-col ">
+        <div class="flex-1 flex flex-col">
 
             <header class="flex bg-background-card items-center justify-between px-6 py-3 absolute mx-auto inset-x-0 bottom-0">
 
@@ -144,11 +144,9 @@
             </header>
 
             <!-- CONTENT AREA -->
-            <main class="flex-1 inset-0 top-24 bg-card p-2 pb-16 overflow-hidden">
-                <div class="bg-background rounded-2xl p-2 w-full h-full overflow-y-auto">
-                  <div>
-                    {{ block "main" . }}{{ end }}
-                  </div>
+            <main class="bg-card p-2 pb-16 overflow-hidden">
+                <div class="bg-background rounded-2xl p-2 h-full overflow-y-auto">
+                {{ block "main" . }}{{ end }}
                 </div>
             </main>
 
@@ -175,7 +173,7 @@
                 {{ partial "sidebar/tags" . }}
             </div>
 
-            <div id="sidebar-options" class="hidden menu-text">
+            <div id="sidebar-options" class="hidden">
                 {{ partial "sidebar/options" . }}
             </div>
 
@@ -189,7 +187,30 @@
     </div>
 
     <script>
-        
+        const config_search = {
+            algolia: {
+                appId: 'PORZ8KHV7J',
+                searchKey: 'd738ba76fadb86f1e2932a65207a7108',
+                indexName: 'algolia_podcast_sample_dataset'
+            },
+            meilisearch: {
+                url: 'http://192.168.1.70:7700',
+                apiKey: '+kK($(?XMz4%u9(8<QZdReOU',
+                indexName: 'bookmarks'
+            },
+            typesense: {
+                url: 'http://localhost:8108',
+                apiKey: 'TYPESENSE_API_KEY',
+                nodes: [
+                    {
+                        host: 'localhost',
+                        port: 8108,
+                        protocol: 'http'
+                    }
+                ],
+                indexName: 'INDEX_NAME'
+            }
+        };
     </script>
 
 </body>

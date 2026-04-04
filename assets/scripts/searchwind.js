@@ -1,96 +1,6 @@
-// GLOBAL VARIABLES
-const bt_settings = document.getElementById("openSettings");
-const bt_search = document.getElementById("openSearch");
-const sidebar_facets = document.getElementById("sidebar-facets");
-const sidebar_settings = document.getElementById("sidebar-options");
-const sidebar_search = document.getElementById("sidebar-search");
-
-// SEARCH BUTTON
-bt_search.addEventListener("click", () => {
-    search_box.focus();
-});
-
-// SETTINGS BUTTON
-bt_settings.addEventListener("click", () => {
-    sidebar_settings.classList.remove("hidden");
-    sidebar_facets.classList.add("hidden");
-    sidebar_search.classList.add("hidden");
-});
-
-// DARK MODE SCRIPT 
-const root = document.documentElement;
-const toggle_dark = document.getElementById("appearance-switcher");
-
-toggle_dark.addEventListener("click", () => {
-    root.classList.toggle("dark");
-    localStorage.setItem("darkMode", root.classList.contains("dark") ? "true" : "false");
-});
-
-/* Load stored preference */
-if (localStorage.getItem("darkMode") === "true") {
-    root.classList.add("dark");
-}
-
-// SIDEBAR TOGGLE
-const toggle_sidebar = document.getElementById("openMenu");
-const toggle_mini = document.getElementById("openMiniMenu");
-const sidebar = document.getElementById("sidebar");
-const buttons = document.getElementById("navbar-buttons");
-
-toggle_sidebar && toggle_sidebar.addEventListener("click", () => {
-    sidebar.classList.toggle("md:block");
-    localStorage.setItem("sidebar", sidebar.classList.contains("md:block") ? "open" : "close");
-});
-
-toggle_mini && toggle_mini.addEventListener("click", () => {
-    sidebar.classList.toggle("w-80");
-    buttons.classList.toggle("grid");
-
-    const text = document.querySelectorAll(".menu-text");
-    text.forEach(t => t.classList.toggle("hidden"));
-
-    localStorage.setItem("sidebar", sidebar.classList.contains("w-80") ? "open" : "mini");
-});
-
-/* Load stored preference */
-if (localStorage.getItem("sidebar") === "close") {
-    sidebar && sidebar.classList.remove("md:block");
-} if (localStorage.getItem("sidebar") === "mini") {
-    sidebar && sidebar.classList.remove("w-80");
-    buttons.classList.add("grid");
-    const text = document.querySelectorAll(".menu-text");
-    text.forEach(t => t.classList.toggle("hidden"));
-}
-
 // ******* SEARCH INSTANTSEARCH.JS SETUP *******
 
-
 // Configuration object for different providers
-const config = {
-    algolia: {
-        appId: 'PORZ8KHV7J',
-        searchKey: 'd738ba76fadb86f1e2932a65207a7108',
-        indexName: 'algolia_podcast_sample_dataset'
-    },
-    meilisearch: {
-        url: 'http://192.168.1.70:7700',
-        apiKey: '+kK($(?XMz4%u9(8<QZdReOU',
-        indexName: 'bookmarks'
-    },
-    typesense: {
-        url: 'http://localhost:8108',
-        apiKey: 'TYPESENSE_API_KEY',
-        nodes: [
-            {
-                host: 'localhost',
-                port: 8108,
-                protocol: 'http'
-            }
-        ],
-        indexName: 'INDEX_NAME'
-    }
-};
-
 let currentProvider = 'meilisearch';
 let search = null;
 
@@ -121,7 +31,7 @@ function initializeSearch(provider) {
 }
 
 function initAlgolia() {
-    const { appId, searchKey, indexName } = config.algolia;
+    const { appId, searchKey, indexName } = config_search.algolia;
     
     if (appId === 'APP_ID' || searchKey === 'SEARCH_KEY') {
         showError('Please configure your Algolia credentials in the config object');
@@ -141,7 +51,7 @@ function initAlgolia() {
 }
 
 function initMeilisearch() {
-    const { url, apiKey, indexName } = config.meilisearch;
+    const { url, apiKey, indexName } = config_search.meilisearch;
     
     if (url === 'http://localhost:7700' || apiKey === 'MEILISEARCH_KEY') {
         showError('Please configure your Meilisearch credentials in the config object');
@@ -163,7 +73,7 @@ function initMeilisearch() {
 }
 
 function initTypesense() {
-    const { url, apiKey, nodes, indexName } = config.typesense;
+    const { url, apiKey, nodes, indexName } = config_search.typesense;
     
     if (apiKey === 'TYPESENSE_API_KEY') {
         showError('Please configure your Typesense credentials in the config object');
@@ -200,15 +110,23 @@ const customSearchBox = instantsearch.connectors.connectSearchBox((renderOptions
     const input = document.getElementById("q");
 
     if (isFirstRender) {
-      input.addEventListener("input", (event) => {
-        refine(event.target.value);
-      });
+        const bt_search = document.getElementById("openSearch");
+        bt_search.addEventListener("click", () => {
+            input.focus();
+        });
 
-      input.addEventListener("focus", () => {
-        sidebar_search.classList.remove("hidden");
-        sidebar_facets.classList.add("hidden");
-        sidebar_settings.classList.add("hidden");
-      });
+        input.addEventListener("input", (event) => {
+            refine(event.target.value);
+        });
+
+        const sidebar_facets = document.getElementById("sidebar-facets");
+        const sidebar_settings = document.getElementById("sidebar-options");
+        const sidebar_search = document.getElementById("sidebar-search");
+        input.addEventListener("focus", () => {
+            sidebar_search.classList.remove("hidden");
+            sidebar_facets.classList.add("hidden");
+            sidebar_settings.classList.add("hidden");
+        });
     }
 
     if (input.value !== query) {
@@ -261,5 +179,63 @@ function addWidgets() {
 
 // Initialize with Algolia by default
 document.addEventListener('DOMContentLoaded', () => {
+    // GLOBAL VARIABLES
+    const bt_settings = document.getElementById("openSettings");
+    const sidebar_facets = document.getElementById("sidebar-facets");
+    const sidebar_settings = document.getElementById("sidebar-options");
+    const sidebar_search = document.getElementById("sidebar-search");
+
+    // SETTINGS BUTTON
+    bt_settings.addEventListener("click", () => {
+        sidebar_settings.classList.remove("hidden");
+        sidebar_facets.classList.add("hidden");
+        sidebar_search.classList.add("hidden");
+    });
+
+    // DARK MODE SCRIPT 
+    const root = document.documentElement;
+    const toggle_dark = document.getElementById("appearance-switcher");
+
+    toggle_dark.addEventListener("click", () => {
+        root.classList.toggle("dark");
+        localStorage.setItem("darkMode", root.classList.contains("dark") ? "true" : "false");
+    });
+
+    /* Load stored preference */
+    if (localStorage.getItem("darkMode") === "true") {
+        root.classList.add("dark");
+    }
+
+    // SIDEBAR TOGGLE
+    const toggle_sidebar = document.getElementById("openMenu");
+    const toggle_mini = document.getElementById("openMiniMenu");
+    const sidebar = document.getElementById("sidebar");
+    const buttons = document.getElementById("navbar-buttons");
+
+    toggle_sidebar && toggle_sidebar.addEventListener("click", () => {
+        sidebar.classList.toggle("md:block");
+        localStorage.setItem("sidebar", sidebar.classList.contains("md:block") ? "open" : "close");
+    });
+
+    toggle_mini && toggle_mini.addEventListener("click", () => {
+        sidebar.classList.toggle("w-80");
+        buttons.classList.toggle("grid");
+
+        const text = document.querySelectorAll(".menu-text");
+        text.forEach(t => t.classList.toggle("hidden"));
+
+        localStorage.setItem("sidebar", sidebar.classList.contains("w-80") ? "open" : "mini");
+    });
+
+    /* Load stored preference */
+    if (localStorage.getItem("sidebar") === "close") {
+        sidebar && sidebar.classList.remove("md:block");
+    } if (localStorage.getItem("sidebar") === "mini") {
+        sidebar && sidebar.classList.remove("w-80");
+        buttons.classList.add("grid");
+        const text = document.querySelectorAll(".menu-text");
+        text.forEach(t => t.classList.toggle("hidden"));
+    }   
+
     initializeSearch(currentProvider);
 });
