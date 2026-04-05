@@ -2,7 +2,7 @@
     <form id="globalSearch" class="w-full px-4 flex items-center justify-center" role="search" aria-label="Global">
         <div id="searchbox" class="static w-full">
             <label for="q" class="sr-only">{{ .Title }}</label>
-            <span class="pointer-events-none absolute inset-y-0 right-6 flex items-center text-primary">
+            <span class="hidden md:flex pointer-events-none absolute inset-y-0 right-6 items-center text-primary">
                 {{ partial "icon" "search" }}
             </span>
 
@@ -11,4 +11,38 @@
                                     focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" />
         </div>
     </form>
+    <div class="max-md:flex hidden w-full">
+        <button class="p-3 w-full">
+            <a href="/" class="flex items-center justify-center">
+                {{ partial "icon" "home" }}
+            </a>
+        </button>
+        
+        {{ if .Site.Params.showCategoriesMenu }}
+        <button class="p-3 w-full">
+            <a href="/categories" class="flex items-center justify-center">
+                {{ partial "icon" "categories" }}
+            </a>
+        </button>
+        {{ end }}
+        {{ if .Site.Params.showTagsMenu }}
+        <button class="p-3 w-full">
+            <a href="/tags" class="flex items-center justify-center">
+                {{ partial "icon" "tag" }}
+            </a>
+        </button>
+        {{ end }}
+
+        <button id="openSearch-m" class="p-3 w-full">
+            <div class="flex items-center justify-center">
+                {{ partial "icon" "search" }}
+            </div>
+        </button>
+        
+        <button id="openSettings-m" class="p-3 w-full">
+            <div class="flex items-center justify-center">
+                {{ partial "icon" "settings" }}
+            </div>
+        </button>
+    </div>
 </nav>

@@ -111,7 +111,17 @@ const customSearchBox = instantsearch.connectors.connectSearchBox((renderOptions
 
     if (isFirstRender) {
         const bt_search = document.getElementById("openSearch");
+        const bt_search_m = document.getElementById("openSearch-m");
+        const sidebar = document.getElementById("sidebar");
+        const sidebar_facets = document.getElementById("sidebar-facets");
+        const sidebar_settings = document.getElementById("sidebar-options");
+        const sidebar_search = document.getElementById("sidebar-search");
+
         bt_search.addEventListener("click", () => {
+            input.focus();
+        });
+        bt_search_m.addEventListener("click", () => {
+            sidebar.classList.remove("hidden");
             input.focus();
         });
 
@@ -119,9 +129,6 @@ const customSearchBox = instantsearch.connectors.connectSearchBox((renderOptions
             refine(event.target.value);
         });
 
-        const sidebar_facets = document.getElementById("sidebar-facets");
-        const sidebar_settings = document.getElementById("sidebar-options");
-        const sidebar_search = document.getElementById("sidebar-search");
         input.addEventListener("focus", () => {
             sidebar_search.classList.remove("hidden");
             sidebar_facets.classList.add("hidden");
@@ -181,12 +188,21 @@ function addWidgets() {
 document.addEventListener('DOMContentLoaded', () => {
     // GLOBAL VARIABLES
     const bt_settings = document.getElementById("openSettings");
+    const bt_settings_m = document.getElementById("openSettings-m");
+    const sidebar = document.getElementById("sidebar");
     const sidebar_facets = document.getElementById("sidebar-facets");
     const sidebar_settings = document.getElementById("sidebar-options");
     const sidebar_search = document.getElementById("sidebar-search");
 
     // SETTINGS BUTTON
     bt_settings.addEventListener("click", () => {
+        sidebar_settings.classList.remove("hidden");
+        sidebar_facets.classList.add("hidden");
+        sidebar_search.classList.add("hidden");
+    });
+
+    bt_settings_m.addEventListener("click", () => {
+        sidebar.classList.remove("hidden");
         sidebar_settings.classList.remove("hidden");
         sidebar_facets.classList.add("hidden");
         sidebar_search.classList.add("hidden");
@@ -209,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // SIDEBAR TOGGLE
     const toggle_sidebar = document.getElementById("openMenu");
     const toggle_mini = document.getElementById("openMiniMenu");
-    const sidebar = document.getElementById("sidebar");
     const buttons = document.getElementById("navbar-buttons");
 
     toggle_sidebar && toggle_sidebar.addEventListener("click", () => {
