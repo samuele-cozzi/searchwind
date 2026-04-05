@@ -5,6 +5,6 @@
     showTagsMenu = true
 
     [params.usersettings]
-        sidebar = "right" # left/right 
+        sidebar = "left" # left/right 
 
     

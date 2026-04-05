@@ -96,22 +96,29 @@
 </head>
 
 <body class="h-screen overflow-hidden bg-background-card">
-
     <div class="flex h-full">
-
+        
         <!-- LEFT SIDEBAR -->
         {{ if eq .Site.Params.usersettings.sidebar "left" }}
-        <aside id="sidebar" class="transition-all duration-300 md:block hidden pl-3 pr-1 overflow-y-auto w-80">
+        <aside id="sidebar" class="transition-all duration-300 hidden md:block pl-3 pr-1 overflow-y-auto w-80">
             <div class="flex items-center justify-between p-3">
                 <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
-                <button id="openMiniMenu">
+                <button id="closeSidebarMobile" class="md:hidden">
+                    <div class="flex items-center justify-center">
+                    {{ partial "icon" "xmark" }}
+                    </div>
+                </button>
+                
+                <button id="openMiniMenu" class="hidden md:block">
                     <div class="flex items-center justify-center">
                     {{ partial "icon" "bars" }}
                     </div>
                 </button>
             </div>
 
-            {{ partial "header/navbar-buttons" . }}
+            <div class="hidden md:block">
+                {{ partial "header/navbar-buttons" . }}
+            </div>
 
             <div id="sidebar-facets" class="menu-text">
                 {{ partial "sidebar/categories" . }}

@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar_facets = document.getElementById("sidebar-facets");
     const sidebar_settings = document.getElementById("sidebar-options");
     const sidebar_search = document.getElementById("sidebar-search");
+    const closeSidebarMobile = document.getElementById("closeSidebarMobile");
 
     // SETTINGS BUTTON
     bt_settings.addEventListener("click", () => {
@@ -206,6 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar_settings.classList.remove("hidden");
         sidebar_facets.classList.add("hidden");
         sidebar_search.classList.add("hidden");
+    });
+
+    // CLOSE SIDEBAR ON MOBILE
+    closeSidebarMobile && closeSidebarMobile.addEventListener("click", () => {
+        sidebar.classList.add("hidden");
     });
 
     // DARK MODE SCRIPT 
@@ -250,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         buttons.classList.add("grid");
         const text = document.querySelectorAll(".menu-text");
         text.forEach(t => t.classList.toggle("hidden"));
-    }   
+    }
 
     initializeSearch(currentProvider);
 });
