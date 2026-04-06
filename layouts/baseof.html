@@ -103,11 +103,11 @@
         <aside id="sidebar" class="transition-all duration-300 hidden md:block pl-3 pr-1 overflow-y-auto w-80">
             <div class="flex items-center justify-between p-3">
                 <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
-                <button id="closeSidebarMobile" class="md:hidden">
+                <!-- <button id="closeSidebarMobile" class="md:hidden">
                     <div class="flex items-center justify-center">
                     {{ partial "icon" "xmark" }}
                     </div>
-                </button>
+                </button> -->
                 
                 <button id="openMiniMenu" class="hidden md:block">
                     <div class="flex items-center justify-center">
@@ -138,9 +138,9 @@
         {{ end }}
 
         <!-- MAIN CONTENT -->
-        <div class="flex-1 flex flex-col">
+        <div class="flex flex-1 flex-col">
 
-            <header class="flex bg-background-card items-center justify-between px-6 py-3 absolute mx-auto inset-x-0 bottom-0">
+            <header class="flex bg-background-card items-center justify-between p-3 absolute inset-x-0 bottom-0">
 
                 {{ partial "header/navbar-left" . }}
 
@@ -151,7 +151,7 @@
             </header>
 
             <!-- CONTENT AREA -->
-            <main class="bg-card p-2 pb-16 overflow-hidden">
+            <main id="main-content" class="bg-card p-2 pb-16 overflow-hidden">
                 <div class="bg-background rounded-2xl p-2 h-full overflow-y-auto">
                 {{ block "main" . }}{{ end }}
                 </div>
@@ -162,17 +162,25 @@
 
         <!-- RIGHT SIDEBAR -->
         {{ if eq .Site.Params.usersettings.sidebar "right" }}
-        <aside id="sidebar" class="transition-all duration-300 md:block hidden pl-1 pr-3 overflow-y-auto w-80">
+        <aside id="sidebar" class="transition-all duration-300 md:block hidden pl-1 pr-3 overflow-y-auto">
             <div class="flex items-center justify-between p-3">
-                <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
-                <button id="openMiniMenu">
+                <h1 id="sidebar-title" class="menu-text font-semibold text-lg text-base pr-6">{{ .Title }}</h1>
+                <!-- <button id="closeSidebarMobile" class="md:hidden">
+                    <div class="flex items-center justify-center">
+                    {{ partial "icon" "xmark" }}
+                    </div>
+                </button> -->
+                
+                <button id="openMiniMenu" class="hidden md:block">
                     <div class="flex items-center justify-center">
                     {{ partial "icon" "bars" }}
                     </div>
                 </button>
             </div>
 
-            {{ partial "header/navbar-buttons" . }}
+            <div class="hidden md:block">
+                {{ partial "header/navbar-buttons" . }}
+            </div>
 
             <div id="sidebar-facets" class="menu-text">
                 {{ partial "sidebar/categories" . }}

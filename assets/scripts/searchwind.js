@@ -116,6 +116,7 @@ const customSearchBox = instantsearch.connectors.connectSearchBox((renderOptions
         const sidebar_facets = document.getElementById("sidebar-facets");
         const sidebar_settings = document.getElementById("sidebar-options");
         const sidebar_search = document.getElementById("sidebar-search");
+        const main_content = document.getElementById("main-content");
 
         bt_search.addEventListener("click", () => {
             input.focus();
@@ -133,6 +134,7 @@ const customSearchBox = instantsearch.connectors.connectSearchBox((renderOptions
             sidebar_search.classList.remove("hidden");
             sidebar_facets.classList.add("hidden");
             sidebar_settings.classList.add("hidden");
+            main_content.classList.add("hidden");
         });
     }
 
@@ -194,12 +196,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar_settings = document.getElementById("sidebar-options");
     const sidebar_search = document.getElementById("sidebar-search");
     const closeSidebarMobile = document.getElementById("closeSidebarMobile");
+    const main_content = document.getElementById("main-content");
 
     // SETTINGS BUTTON
     bt_settings.addEventListener("click", () => {
         sidebar_settings.classList.remove("hidden");
         sidebar_facets.classList.add("hidden");
         sidebar_search.classList.add("hidden");
+        main_content.classList.remove("hidden");
     });
 
     bt_settings_m.addEventListener("click", () => {
@@ -212,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // CLOSE SIDEBAR ON MOBILE
     closeSidebarMobile && closeSidebarMobile.addEventListener("click", () => {
         sidebar.classList.add("hidden");
+        main_content.classList.remove("hidden");
     });
 
     // DARK MODE SCRIPT 
@@ -230,29 +235,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // SIDEBAR TOGGLE
     const toggle_sidebar = document.getElementById("openMenu");
+    const sidebar_title = document.getElementById("sidebar-title");
     const toggle_mini = document.getElementById("openMiniMenu");
     const buttons = document.getElementById("navbar-buttons");
 
     toggle_sidebar && toggle_sidebar.addEventListener("click", () => {
         sidebar.classList.toggle("md:block");
+        main_content.classList.remove("hidden");
         localStorage.setItem("sidebar", sidebar.classList.contains("md:block") ? "open" : "close");
     });
 
     toggle_mini && toggle_mini.addEventListener("click", () => {
-        sidebar.classList.toggle("w-80");
         buttons.classList.toggle("grid");
+        main_content.classList.remove("hidden");
 
         const text = document.querySelectorAll(".menu-text");
         text.forEach(t => t.classList.toggle("hidden"));
 
-        localStorage.setItem("sidebar", sidebar.classList.contains("w-80") ? "open" : "mini");
+        localStorage.setItem("sidebar", sidebar_title.classList.contains("hidden") ? "mini" : "open");
     });
 
     /* Load stored preference */
     if (localStorage.getItem("sidebar") === "close") {
         sidebar && sidebar.classList.remove("md:block");
     } if (localStorage.getItem("sidebar") === "mini") {
-        sidebar && sidebar.classList.remove("w-80");
         buttons.classList.add("grid");
         const text = document.querySelectorAll(".menu-text");
         text.forEach(t => t.classList.toggle("hidden"));
