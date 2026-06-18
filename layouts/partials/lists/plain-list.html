@@ -28,11 +28,11 @@
                             {{ $tags := .Params.tags }}
                             {{ if reflect.IsSlice $tags }}
                                 {{ range $tags }}
-                                <a href="/tags/{{ . | urlize }}/" class="text-xs bg-secondary text-base px-2 py-1 rounded">{{ . }}</a>
+                                <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}/" class="text-xs bg-secondary text-base px-2 py-1 rounded">{{ . }}</a>
                                 {{ end }}
                             {{ else }}
                                 {{ range split $tags "," }}
-                                <a href="/tags/{{ . | urlize }}/" class="text-xs bg-secondary text-base px-2 py-1 rounded">{{ . }}</a>
+                                <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}/" class="text-xs bg-secondary text-base px-2 py-1 rounded">{{ . }}</a>
                                 {{ end }}
                             {{ end }}
                             </div>
