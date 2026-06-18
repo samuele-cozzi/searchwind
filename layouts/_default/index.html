@@ -43,41 +43,55 @@
   <p class="text-accent">This is accent text.</p>
 </div>
 
-<div class="space-y-4">
+<div id="page-list" >
   {{ range .Pages }}
-  <article
-    class="gap-4 p-4 bg-background-card rounded-lg">
-    <a href="{{ .RelPermalink }}" class="flex">
+  <article class="item-container bg-background-card rounded-lg m-1 relative">
+    <a href="{{ .RelPermalink }}" class="item-link flex">
       <!-- Thumbnail placeholder -->
-      <div class="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 bg-background rounded flex items-center justify-center">
+       <!-- keeps entire image visible, preserves aspect ratio -->
+      <!-- <img src="img.jpg" class="w-full h-64 object-contain" alt="..."> -->
+      <!-- with background-like element -->
+      <!-- <div class="w-64 h-40 bg-gray-200">
+        <img src="img.jpg" class="w-full h-full object-contain" alt="...">
+      </div> -->
+      <!-- <div class="flex-shrink-0 w-16 h-16 bg-card rounded flex items-center justify-center"> -->
         <img
               src="{{ .Params.cover }}"
               role="presentation"
               loading="lazy"
               decoding="async"
               fetchpriority="low"
-              class="aspect-square w-full rounded-full object-cover">
-      </div>
+              class="item-img max-h-24 max-w-24 aspect-square px-3 py-3 rounded-full object-cover" />
+      <!-- </div> -->
 
       <!-- Content -->
-      <div class="flex-1 px-4">
-        <span class="text-lg font-semibold text-base block mb-1">
+      <div class="flex flex-col w-full">
+        <span class="item-title px-3 pt-3 pb-1 text-sm font-semibold text-primary w-full max-w-32 truncate">
           {{ .Title }}
         </span>
         {{ if .Params.tags }}
-        <div class="flex flex-wrap gap-1">
+        <div class="item-tags flex-wrap gap-1 px-3 pb-2">
           {{ range .Params.tags }}
-          <span class="text-xs text-base bg-primary px-2 py-1 rounded-full">{{ . }}</span>
+          <span class="text-xs text-base bg-primary px-1 py-0.5 rounded-full">{{ . }}</span>
           {{ end }}
         </div>
         {{ end }}
+        <div class="item-tags text-muted px-3 py-2 text-xs truncate border-t border-background">
+          {{ with .Params.source }}
+            {{ $domain := replaceRE "^(?:.*://)?([^/]+).*" "$1" . }}
+            {{ $domain }}
+          {{ end }}
+           <span class="float-right">{{ .Params.date | time.Format "Jan 2, 2006" }}</span>
+        </div>
+
       </div>
+      
     </a>
   </article>
   {{ end }}
 </div>
 
-<div class="grid grid-cols-4">
+<div class="grid grid-cols-3">
   {{ range .Pages}}
   <div class="group relative p-4 m-1 bg-background-card rounded-lg">
     <a href="{{ .RelPermalink }}">
@@ -97,5 +111,60 @@
   {{ end }}
 </div>
 
+<div class="grid grid-cols-1">
+  {{ range .Pages}}
+  <div class="mb-5">
+    <a href="{{ .RelPermalink }}" class="block rounded-lg relative p-5 transform transition-all duration-300 scale-100 hover:scale-95" style="background: url({{ .Params.cover }}) center; background-size: cover;">
+        <div class="absolute top-0 right-0 -mt-3 mr-3">
+            <div class="rounded-full bg-indigo-500 text-white text-xs py-1 pl-2 pr-3 leading-none">
+              <i class="mdi mdi-fire text-base align-middle"></i> 
+              <span class="align-middle">FRESH</span>
+            </div>
+        </div>
+        <div class="absolute top-0 right-0 -mt-3 mr-3">
+            <div class="rounded-full bg-indigo-500 text-white text-xs py-1 pl-2 pr-3 leading-none">
+              <i class="mdi mdi-fire text-base align-middle"></i> 
+              <span class="align-middle">FRESH</span>
+            </div>
+        </div>
+        <div class="h-48"></div>
+        <h2 class="text-base text-primary text-2xl font-bold leading-tight mb-3 pr-5">{{ .Title }}</h2>
+        <!-- <div class="flex w-full items-center text-sm text-gray-300 font-medium">
+            <div class="flex-1 flex items-center">
+                <div class="rounded-full w-8 h-8 mr-3" style="background: url(https://randomuser.me/api/portraits/women/74.jpg) center; background-size: cover;"></div>
+                <div>Gwen Thomson</div>
+            </div>
+            <div><i class="mdi mdi-thumb-up"></i> 18</div>
+        </div> -->
+    </a>
+  </div>
+  {{ end }}
+</div>
+
+<script>
+// Initialize 
+document.addEventListener('DOMContentLoaded', () => {
+  
+  // const pageList = document.getElementById('page-list');
+  // pageList.classList.add('grid', 'grid-cols-5');
+  // const text = document.querySelectorAll(".item-title");
+  // text.forEach(t => t.classList.add("absolute", "left-1", "bottom-1"));
+  // const tags = document.querySelectorAll(".item-tags");
+  // tags.forEach(t => t.classList.add("hidden"));
+  // const img = document.querySelectorAll(".item-img");
+  // img.forEach(t => t.classList.remove("max-h-24", "max-w-24")); 
+
+
+
+  // const pageList = document.getElementById('page-list');
+  // pageList.classList.add('grid', 'grid-cols-5');
+  // const img = document.querySelectorAll(".item-img");
+  // img.forEach(t => t.classList.remove("max-h-24", "max-w-24", "rounded-full", "px-3"));
+  // img.forEach(t => t.classList.add("object-contain", "w-full", "h-48"));
+  // const link = document.querySelectorAll(".item-link");
+  // link.forEach(t => t.classList.remove("flex"));
+});
+</script>
 
 {{ end }}
+

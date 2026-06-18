@@ -24,8 +24,15 @@
         </a>
         {{ if .Params.tags }}
           <div class="flex flex-wrap gap-1">
-            {{ range .Params.tags }}
-              <span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">{{ . }}</span>
+            {{ $tags := .Params.tags }}
+            {{ if reflect.IsSlice $tags }}
+              {{ range $tags }}
+                <span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">{{ . }}</span>
+              {{ end }}
+            {{ else }}
+              {{ range split $tags "," }}
+                <span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">{{ . }}</span>
+              {{ end }}
             {{ end }}
           </div>
         {{ else }}
