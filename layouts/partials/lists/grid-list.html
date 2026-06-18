@@ -1,0 +1,19 @@
+<div class="grid grid-cols-3">
+  {{ range .Pages}}
+  <div class="group relative p-4 m-1 bg-background-card rounded-lg">
+    <a href="{{ .RelPermalink }}">
+      <img src="{{ .Params.cover }}" alt="{{ .Title }}" class="aspect-square w-full rounded-full bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8" />
+      <span class="text-lg font-semibold text-base block mb-1">
+        {{ .Title }}
+      </span>
+      {{ if .Params.tags }}
+      <div class="flex flex-wrap gap-1">
+        {{ range .Params.tags }}
+        <span class="text-xs text-base bg-primary px-2 py-1 rounded-full">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+    </a>
+  </div>
+  {{ end }}
+</div>
