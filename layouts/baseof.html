@@ -14,66 +14,66 @@
     <style>
         :root {
         /* Primary */
-        --color-primary: #2bf124;
-        --color-primary-hover: #0dd270;
-        --color-primary-active: #38ca49;
-        --color-primary-outline: #A5B4FC;
+        --color-primary: {{ .Site.Params.colors.light.primary }};
+        --color-primary-hover: {{ .Site.Params.colors.light.primary_hover }};
+        --color-primary-active: {{ .Site.Params.colors.light.primary_active }};
+        --color-primary-outline: {{ .Site.Params.colors.light.primary_outline }};
 
         /* Secondary */
-        --color-secondary: #38BDF8;
-        --color-secondary-hover: #0EA5E9;
-        --color-secondary-active: #0284C7;
-        --color-secondary-outline: #7DD3FC;
+        --color-secondary: {{ .Site.Params.colors.light.secondary }};
+        --color-secondary-hover: {{ .Site.Params.colors.light.secondary_hover }};
+        --color-secondary-active: {{ .Site.Params.colors.light.secondary_active }};
+        --color-secondary-outline: {{ .Site.Params.colors.light.secondary_outline }};
 
         /* Accent */
-        --color-accent: #FBBF24;
-        --color-accent-hover: #F59E0B;
-        --color-accent-active: #D97706;
-        --color-accent-outline: #FCD34D;
+        --color-accent: {{ .Site.Params.colors.light.accent }};
+        --color-accent-hover: {{ .Site.Params.colors.light.accent_hover }};
+        --color-accent-active: {{ .Site.Params.colors.light.accent_active }};
+        --color-accent-outline: {{ .Site.Params.colors.light.accent_outline }};
 
         /* Backgrounds */
         --color-bg: {{ .Site.Params.colors.light.bg  }};
         --color-bg-card: {{ .Site.Params.colors.light.bg_card }};
 
         /* Text Colors */
-        --text-base: #111827;   /* gray-900 */
-        --text-muted: #4B5563;  /* gray-600 */
+        --text-base: {{ .Site.Params.colors.light.text_base }};
+        --text-muted: {{ .Site.Params.colors.light.text_muted }};
 
-        --text-primary: #1407cf;
-        --text-secondary: #0C4A6E;
-        --text-accent: #92400E;
+        --text-primary: {{ .Site.Params.colors.light.text_primary }};
+        --text-secondary: {{ .Site.Params.colors.light.text_secondary }};
+        --text-accent: {{ .Site.Params.colors.light.text_accent }};
         }
 
         .dark {
         /* Primary */
-        --color-primary: #3730A3;
-        --color-primary-hover: #312E81;
-        --color-primary-active: #1E1B4B;
-        --color-primary-outline: #4C51BF;
+        --color-primary: {{ .Site.Params.colors.dark.primary }};
+        --color-primary-hover: {{ .Site.Params.colors.dark.primary_hover }};
+        --color-primary-active: {{ .Site.Params.colors.dark.primary_active }};
+        --color-primary-outline: {{ .Site.Params.colors.dark.primary_outline }};
 
         /* Secondary */
-        --color-secondary: #075985;
-        --color-secondary-hover: #0C4A6E;
-        --color-secondary-active: #082F49;
-        --color-secondary-outline: #38BDF8;
+        --color-secondary: {{ .Site.Params.colors.dark.secondary }};
+        --color-secondary-hover: {{ .Site.Params.colors.dark.secondary_hover }};
+        --color-secondary-active: {{ .Site.Params.colors.dark.secondary_active }};
+        --color-secondary-outline: {{ .Site.Params.colors.dark.secondary_outline }};
 
         /* Accent */
-        --color-accent: #B45309;
-        --color-accent-hover: #92400E;
-        --color-accent-active: #78350F;
-        --color-accent-outline: #F59E0B;
+        --color-accent: {{ .Site.Params.colors.dark.accent }};
+        --color-accent-hover: {{ .Site.Params.colors.dark.accent_hover }};
+        --color-accent-active: {{ .Site.Params.colors.dark.accent_active }};
+        --color-accent-outline: {{ .Site.Params.colors.dark.accent_outline }};
 
         /* Backgrounds */
-        --color-bg: #1F2937;
-        --color-bg-card: #111827;
+        --color-bg: {{ .Site.Params.colors.dark.bg }};
+        --color-bg-card: {{ .Site.Params.colors.dark.bg_card }};
 
         /* Text Colors */
-        --text-base: #E5E7EB;   /* gray-200 */
-        --text-muted: #9CA3AF;  /* gray-400 */
+        --text-base: {{ .Site.Params.colors.dark.text_base }};
+        --text-muted: {{ .Site.Params.colors.dark.text_muted }};
 
-        --text-primary: #A5B4FC;
-        --text-secondary: #7DD3FC;
-        --text-accent: #FCD34D;
+        --text-primary: {{ .Site.Params.colors.dark.text_primary }};
+        --text-secondary: {{ .Site.Params.colors.dark.text_secondary }};
+        --text-accent: {{ .Site.Params.colors.dark.text_accent }};
         }
     </style>
 
