@@ -1,26 +1,33 @@
 {{ define "main" }}
-<article class="max-w-3xl">
-  <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ .Title }}</h1>
+<div class="space-y-4">
+  <article class="p-4 bg-background-card rounded-lg m-1 relative">
+    
+    {{ $imageName := .Params.cover }}
+    {{ with .Resources.GetMatch $imageName }}
+    {{ with .Resize "800x600" }}
+    <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}">
+    {{ end }}
+    {{ end }}
+    
+    {{ if .Site.Params.pagelayout.showTitle }}
+    <h1 class="m-4 text-primary text-3xl md:text-4xl font-bold ">{{ .Title }}</h1>
+    {{ end }}
 
-  {{ $imageName := .Params.cover }}
-  {{ with .Resources.GetMatch $imageName }}
-  <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}">
-  {{ end }}
-
-  <div class="prose prose-sm md:prose max-w-none">
-    {{ .Content }}
-  </div>
-
-  <nav class="mt-8 pt-6 border-t border-gray-200">
-    <div class="flex justify-between">
-      {{ with .PrevInSection }}
-        <a href="{{ .Permalink }}" class="text-blue-600 hover:text-blue-800">&larr; {{ .Title }}</a>
-      {{ end }}
-      {{ with .NextInSection }}
-        <a href="{{ .Permalink }}" class="text-blue-600 hover:text-blue-800">{{ .Title }} &rarr;</a>
-      {{ end }}
+    <div class="text-base prose prose-invert pt-4">
+      {{ .Content }}
     </div>
-  </nav>
-</article>
+
+    <nav class="mt-8 pt-6 border-t border-gray-200">
+      <div class="flex justify-between">
+        {{ with .PrevInSection }}
+          <a href="{{ .Permalink }}" class="text-secondary hover:text-blue-800">&larr; {{ .Title }}</a>
+        {{ end }}
+        {{ with .NextInSection }}
+          <a href="{{ .Permalink }}" class="text-secondary hover:text-blue-800">{{ .Title }} &rarr;</a>
+        {{ end }}
+      </div>
+    </nav>
+  </article>
+</div>
 {{ end }}
 

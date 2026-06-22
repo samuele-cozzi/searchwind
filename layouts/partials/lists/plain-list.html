@@ -1,7 +1,7 @@
 <div class="space-y-4">
     {{ range .Pages }}
     <article class="item-container bg-background-card rounded-lg m-1 relative">
-        <div href="{{ .RelPermalink }}" class="item-link flex">    
+        <div class="item-link flex">    
             <a href="{{ if eq .Site.Params.usersettings.imageLink "external" }}{{ .Params.source }}{{ else }}{{ .RelPermalink }}{{ end }}" 
                 {{if eq .Site.Params.usersettings.imageLink "external"}}target="_blank"{{ end }}
                 class="flex items-center">

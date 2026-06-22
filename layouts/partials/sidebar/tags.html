@@ -15,7 +15,7 @@
     {{ $allTags := .Site.Taxonomies.tags }}
     {{ range $tag, $pages := $allTags }}
       <li>
-        <a href="{{ $.Site.BaseURL }}tags/{{ $tag | urlize }}/" class="text-primary hover:underline text-sm">
+        <a href="{{ $.Site.BaseURL }}tags/{{ $tag | urlize }}/" class="text-secondary hover:underline text-sm">
           {{ $tag }} ({{ len $pages }})
         </a>
       </li>
