@@ -77,6 +77,12 @@
         }
     </style>
 
+    <script>
+        if (localStorage.getItem("darkMode") === "true") {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+
     <!-- InstantSearch.js -->
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.92.0/dist/instantsearch.production.min.js" integrity="sha256-UerI9i8jTgE4HrbE1SeOpm9Tyd297GmAagU0NV8JQqU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.12.0/themes/reset-min.css" integrity="sha256-MetkRItMiXM7wjU0awrA13/5UeKtcW3cyFfPh7ZJbOM=" crossorigin="anonymous">

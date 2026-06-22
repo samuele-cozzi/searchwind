@@ -228,11 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem("darkMode", root.classList.contains("dark") ? "true" : "false");
     });
 
-    /* Load stored preference */
-    if (localStorage.getItem("darkMode") === "true") {
-        root.classList.add("dark");
-    }
-
     // SIDEBAR TOGGLE
     const toggle_sidebar = document.getElementById("openMenu");
     const sidebar_title = document.getElementById("sidebar-title");
@@ -245,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem("sidebar", sidebar.classList.contains("md:block") ? "open" : "close");
     });
 
-    toggle_mini && toggle_mini.addEventListener("click", () => {
+    toggle_mini && toggle_mini.a3ddEventListener("click", () => {
         buttons.classList.toggle("grid");
         main_content.classList.remove("hidden");
 
