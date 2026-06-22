@@ -11,5 +11,6 @@ npm run watch:css
     - logo
     - showCategoriesMenu
     - showTagsMenu
+    - imageLink
     - sidebar left/right
     - color customization

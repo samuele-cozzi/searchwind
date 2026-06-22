@@ -1,28 +1,32 @@
 <div class="space-y-4">
     {{ range .Pages }}
     <article class="item-container bg-background-card rounded-lg m-1 relative">
-        <div href="{{ .RelPermalink }}" class="item-link flex">        
-            <a href="{{ .RelPermalink }}">
+        <div href="{{ .RelPermalink }}" class="item-link flex">    
+            <a href="{{ if eq .Site.Params.usersettings.imageLink "external" }}{{ .Params.source }}{{ else }}{{ .RelPermalink }}{{ end }}" 
+                {{if eq .Site.Params.usersettings.imageLink "external"}}target="_blank"{{ end }}
+                class="flex items-center">
             {{ $imageName := .Params.cover }}
             {{ with .Resources.GetMatch $imageName }}
+            {{ with .Resize "72x" }}
             <img src="{{ .RelPermalink }}"
                 role="presentation"
                 loading="lazy"
                 decoding="async"
                 fetchpriority="low"
-                class="item-img max-h-24 max-w-24 aspect-square px-3 py-3 rounded-full object-cover" />
+                class="item-img aspect-square px-3 py-3 rounded-full object-cover"/>
+            {{ end }}
             {{ end }}
             </a>
 
             <div class="flex flex-col w-full">
-                <div class="py-3 pr-3">
+                <div class="flex flex-col md:flex-row py-3 pr-3">
                     <!-- TITLE -->
-                    <a href="{{ .RelPermalink }}" class="item-title px-3 pt-3 pb-1 text-m font-semibold text-primary max-w-32 truncate">
+                    <a href="{{ .RelPermalink }}" class="item-title px-3 pt-3 pb-1 text-m font-semibold text-primary max-w-64 truncate">
                         {{ .Title }}
                     </a>
 
                     <!-- TAGS -->
-                    <span class="float-right">
+                    <span class="ml-3 md:ml-auto">
                         {{ if .Params.tags }}
                             <div class="flex flex-wrap gap-1">
                             {{ $tags := .Params.tags }}
@@ -36,22 +40,20 @@
                                 {{ end }}
                             {{ end }}
                             </div>
-                        {{ else }}
-                            <p class="text-sm text-gray-600">tags</p>
                         {{ end }}
                     </span>
                 </div>
-                <div class="item-tags text-muted px-3 py-2 text-xs truncate border-t border-background">
+                <a href="{{ .Params.source }}" target="_blank" class="item-tags text-muted px-3 py-2 text-xs truncate border-t border-background">
                     <!-- EXTERNAL LINK -->
-                    <a href="{{ .Params.source }}" target="_blank">
+                    <span>
                     {{ with .Params.source }}
                         {{ $domain := replaceRE "^(?:.*://)?([^/]+).*" "$1" . }}
                         {{ $domain }}
                     {{ end }}
-                    </a>
+                    </span>
                     <!-- DATE -->
                     <span class="float-right">{{ .Params.date | time.Format "Jan 2, 2006" }}</span>
-                </div>
+                </a>
 
             </div>
         

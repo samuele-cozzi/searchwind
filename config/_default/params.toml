@@ -5,6 +5,7 @@
 
 #    [usersettings]
 #        sidebar = "right" # left/right
+#        imageLink = external
 
     [colors]
         [colors.light]
