@@ -46,6 +46,7 @@ function initializeSearch(provider) {
     }
 }
 
+// FUSE 
 function initFuse() {
     const input_search = document.getElementById("q");
     buildFuseIndex(input_search);
@@ -124,8 +125,7 @@ function executeFuseQuery(term) {
 //   }
 }
 
-
-
+// INSTANTSEARCH.JS
 function initAlgolia() {
     const { appId, searchKey, indexName } = config_search.algolia;
     
@@ -246,6 +246,7 @@ function addWidgets() {
     ]);
 }
 
+// DOCUMENT LOAD
 document.addEventListener('DOMContentLoaded', () => {
     // GLOBAL VARIABLES
     const bt_settings = document.getElementById("openSettings");

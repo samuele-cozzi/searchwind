@@ -1,4 +1,20 @@
 <div id="navbar-buttons" class="flex">    
+    {{ range .Site.Params.menu.shortcut }}
+    
+    <button id="openCategories" class="p-3 w-full">
+        {{ if eq .linkType "external" }}
+        <a href="{{ .url }}" target="_blank" class="flex items-center justify-center">
+            {{ partial "icon" .logo }}
+        </a>
+        {{ else }}
+        <a href="{{ $.Site.BaseURL }}{{ .url }}" class="flex items-center justify-center">
+            {{ partial "icon" .logo }}
+        </a>
+        {{ end }}
+    </button>
+
+    {{ end }}
+
     {{ if .Site.Params.showCategoriesMenu }}
     <button id="openCategories" class="p-3 w-full">
         <a href="{{ $.Site.BaseURL }}categories" class="flex items-center justify-center">
