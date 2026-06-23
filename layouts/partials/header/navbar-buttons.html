@@ -6,6 +6,7 @@
         </a>
     </button>
     {{ end }}
+    
     {{ if .Site.Params.showTagsMenu }}
     <button id="openTags" class="p-3 w-full">
         <a href="{{ $.Site.BaseURL }}tags" class="flex items-center justify-center">
@@ -13,12 +14,6 @@
         </a>
     </button>
     {{ end }}
-
-    <button id="openSearch" class="p-3 w-full">
-        <div class="flex items-center justify-center">
-            {{ partial "icon" "search" }}
-        </div>
-    </button>
     
     <button id="openSettings" class="p-3 w-full">
         <div class="flex items-center justify-center">

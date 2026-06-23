@@ -1,64 +1,11 @@
-#    logo = "home"
+#    logo = "bug"
 
 #    showCategoriesMenu = false
 #    showTagsMenu = true
 
 #    [usersettings]
-#        sidebar = "right" # left/right
+#        searchProvider = "fuse" # fuse/meilisearch/algolia/typesense
+#        sidebar = "left" # left/right
 #        imageLink = external
 
-    [pagelayout]
-        showTitle = false #true/false
-        
-    [colors]
-        [colors.light]
-            bg = "#d7d41f"
-            bg_card = "#FFFFFF"
-
-            primary = "#2bf124"
-            primary_hover = "#0dd270"
-            primary_active = "#38ca49"
-            primary_outline = "#A5B4FC"
-
-            secondary = "#38BDF8"
-            secondary_hover = "#0EA5E9"
-            secondary_active = "#0284C7"
-            secondary_outline = "#7DD3FC"
-
-            accent = "#FBBF24"
-            accent_hover = "#F59E0B"
-            accent_active = "#D97706"
-            accent_outline = "#FCD34D"
-
-            text_base = "#111827"   
-            text_muted = "#4B5563" 
-
-            text_primary = "#1407cf"
-            text_secondary = "#0C4A6E"
-            text_accent = "#92400E"
-
-        [colors.dark]
-            bg = "#1F2937"
-            bg_card = "#111827"
-
-            primary = "#3730A3"
-            primary_hover = "#312E81"
-            primary_active = "#1E1B4B"
-            primary_outline = "#4C51BF"
-
-            secondary = "#075985"
-            secondary_hover = "#0C4A6E"
-            secondary_active = "#082F49"
-            secondary_outline = "#38BDF8"
-
-            accent = "#B45309"
-            accent_hover = "#92400E"
-            accent_active = "#78350F"
-            accent_outline = "#F59E0B"
-
-            text_base = "#E5E7EB"  
-            text_muted = "#9CA3AF"  
-
-            text_primary = "#A5B4FC"
-            text_secondary = "#7DD3FC"
-            text_accent = "#FCD34D"
+    

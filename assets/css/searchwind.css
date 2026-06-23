@@ -1247,10 +1247,6 @@ video {
   width: 2rem;
 }
 
-.w-80 {
-  width: 20rem;
-}
-
 .w-full {
   width: 100%;
 }
@@ -1513,10 +1509,6 @@ video {
 
 .pl-3 {
   padding-left: 0.75rem;
-}
-
-.pr-1 {
-  padding-right: 0.25rem;
 }
 
 .pr-24 {

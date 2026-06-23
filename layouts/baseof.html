@@ -98,24 +98,108 @@
     </style>
 
     <script>
+        let currentProvider = '{{ .Site.Params.usersettings.searchProvider }}';
         if (localStorage.getItem("darkMode") === "true") {
             document.documentElement.classList.add("dark");
         }
     </script>
 
     <!-- InstantSearch.js -->
-    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.92.0/dist/instantsearch.production.min.js" integrity="sha256-UerI9i8jTgE4HrbE1SeOpm9Tyd297GmAagU0NV8JQqU=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.12.0/themes/reset-min.css" integrity="sha256-MetkRItMiXM7wjU0awrA13/5UeKtcW3cyFfPh7ZJbOM=" crossorigin="anonymous">
+    {{ if or (eq .Site.Params.usersettings.searchProvider "algolia") 
+        (eq .Site.Params.usersettings.searchProvider "meilisearch")
+        (eq .Site.Params.usersettings.searchProvider "typesense") }}
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.92.0/dist/instantsearch.production.min.js" integrity="sha256-UerI9i8jTgE4HrbE1SeOpm9Tyd297GmAagU0NV8JQqU=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8.12.0/themes/reset-min.css" integrity="sha256-MetkRItMiXM7wjU0awrA13/5UeKtcW3cyFfPh7ZJbOM=" crossorigin="anonymous">
 
-    <!-- Algolia InstantSearch -->
-    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4"></script>
+        <script>
+            const config_search = {
+                algolia: {
+                    appId: 'PORZ8KHV7J',
+                    searchKey: 'd738ba76fadb86f1e2932a65207a7108',
+                    indexName: 'algolia_podcast_sample_dataset'
+                },
+                meilisearch: {
+                    url: 'http://192.168.1.70:7700',
+                    apiKey: '+kK($(?XMz4%u9(8<QZdReOU',
+                    indexName: 'bookmarks'
+                },
+                typesense: {
+                    url: 'http://localhost:8108',
+                    apiKey: 'TYPESENSE_API_KEY',
+                    nodes: [
+                        {
+                            host: 'localhost',
+                            port: 8108,
+                            protocol: 'http'
+                        }
+                    ],
+                    indexName: 'INDEX_NAME'
+                }
+            };
 
-    <!-- Meilisearch InstantSearch -->
-    <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch/dist/instant-meilisearch.umd.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch@0.14.4/dist/instant-meilisearch.umd.js"></script> -->
+            const customSearchBox = instantsearch.connectors.connectSearchBox((renderOptions, isFirstRender) => {
+                const { query, refine } = renderOptions;
+                const input = document.getElementById("q");
 
-    <!-- Typesense InstantSearch -->
-    <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
+                if (isFirstRender) {
+                    const bt_search = document.getElementById("openSearch");
+                    const bt_search_m = document.getElementById("openSearch-m");
+                    const sidebar = document.getElementById("sidebar");
+                    const sidebar_facets = document.getElementById("sidebar-facets");
+                    const sidebar_settings = document.getElementById("sidebar-options");
+                    const sidebar_search = document.getElementById("sidebar-search");
+                    const main_content = document.getElementById("main-content");
+
+                    bt_search.addEventListener("click", () => {
+                        input.focus();
+                    });
+                    bt_search_m.addEventListener("click", () => {
+                        sidebar.classList.remove("hidden");
+                        input.focus();
+                    });
+
+                    input.addEventListener("input", (event) => {
+                        refine(event.target.value);
+                    });
+
+                    input.addEventListener("focus", () => {
+                        sidebar_search.classList.remove("hidden");
+                        sidebar_facets.classList.add("hidden");
+                        sidebar_settings.classList.add("hidden");
+                        main_content.classList.add("hidden");
+                    });
+                }
+
+                if (input.value !== query) {
+                    input.value = query;
+                }
+            });
+        </script>
+
+        {{ if eq .Site.Params.usersettings.searchProvider "algolia" }}
+        <!-- Algolia InstantSearch -->
+        <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4"></script>
+        {{ end }}
+
+        {{ if eq .Site.Params.usersettings.searchProvider "meilisearch" }}
+        <!-- Meilisearch InstantSearch -->
+        <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch/dist/instant-meilisearch.umd.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch@0.14.4/dist/instant-meilisearch.umd.js"></script> -->
+        {{ end }}
+
+        {{ if eq .Site.Params.usersettings.searchProvider "typesense" }}
+        <!-- Typesense InstantSearch -->
+        <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
+        {{ end }}
+    {{ end }}
+
+    {{ if eq .Site.Params.usersettings.searchProvider "fuse" }}
+        <!-- <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.4.1" defer></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js" defer></script>
+        <!-- <script type="module">
+        import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.4.1/dist/fuse.mjs'
+        </script> -->
+    {{ end }}
 
     {{- $styles := resources.Get "scripts/searchwind.js" -}}
     <script src={{ $styles.RelPermalink }} ></script>
@@ -154,10 +238,6 @@
 
             <div id="sidebar-options" class="hidden">
                 {{ partial "sidebar/options" . }}
-            </div>
-
-            <div id="sidebar-search" class="hidden menu-text">
-                {{ partial "sidebar/search" . }}
             </div>
 
         </aside>
@@ -218,41 +298,10 @@
                 {{ partial "sidebar/options" . }}
             </div>
 
-            <div id="sidebar-search" class="hidden menu-text">
-                {{ partial "sidebar/search" . }}
-            </div>
-
         </aside>
         {{ end }}
 
     </div>
-
-    <script>
-        const config_search = {
-            algolia: {
-                appId: 'PORZ8KHV7J',
-                searchKey: 'd738ba76fadb86f1e2932a65207a7108',
-                indexName: 'algolia_podcast_sample_dataset'
-            },
-            meilisearch: {
-                url: 'http://192.168.1.70:7700',
-                apiKey: '+kK($(?XMz4%u9(8<QZdReOU',
-                indexName: 'bookmarks'
-            },
-            typesense: {
-                url: 'http://localhost:8108',
-                apiKey: 'TYPESENSE_API_KEY',
-                nodes: [
-                    {
-                        host: 'localhost',
-                        port: 8108,
-                        protocol: 'http'
-                    }
-                ],
-                indexName: 'INDEX_NAME'
-            }
-        };
-    </script>
 
 </body>
 </html>
