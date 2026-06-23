@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem("sidebar", sidebar.classList.contains("md:block") ? "open" : "close");
     });
 
-    toggle_mini && toggle_mini.a3ddEventListener("click", () => {
+    toggle_mini && toggle_mini.addEventListener("click", () => {
         buttons.classList.toggle("grid");
         main_content.classList.remove("hidden");
 

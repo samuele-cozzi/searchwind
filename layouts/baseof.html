@@ -95,33 +95,6 @@
         --text-accent: {{ .Site.Params.colors.dark.text_accent }};
         }
 
-        /* .prose{
-            --tw-prose-body: {{ .Site.Params.colors.light.text_base }};
-            --tw-prose-headings: {{ .Site.Params.colors.light.text_primary }};
-            --tw-prose-lead: #4b5563;
-            --tw-prose-links: {{ .Site.Params.colors.light.text_secondary }};
-            --tw-prose-bold: {{ .Site.Params.colors.light.text_primary }};
-            --tw-prose-counters: #6b7280;
-            --tw-prose-bullets: #d1d5db;
-            --tw-prose-hr: #e5e7eb;
-            --tw-prose-quotes: #111827;
-            --tw-prose-quote-borders: #e5e7eb;
-            --tw-prose-captions: #6b7280;
-            --tw-prose-kbd: #111827;
-            --tw-prose-kbd-shadows: rgb(17 24 39 / 10%);
-            --tw-prose-code: #111827;
-            --tw-prose-pre-code: #e5e7eb;
-            --tw-prose-pre-bg: #1f2937;
-            --tw-prose-th-borders: #d1d5db;
-            --tw-prose-td-borders: #e5e7eb; 
-        }
-        .prose-invert{
-            --tw-prose-invert-body: {{ .Site.Params.colors.dark.text_base }};
-            --tw-prose-invert-headings: {{ .Site.Params.colors.dark.text_primary }};
-            --tw-prose-invert-lead: #4b5563;
-            --tw-prose-invert-links: {{ .Site.Params.colors.dark.text_secondary }};
-            --tw-prose-invert-bold: {{ .Site.Params.colors.dark.text_primary }};
-        } */
     </style>
 
     <script>
@@ -153,9 +126,9 @@
         
         <!-- LEFT SIDEBAR -->
         {{ if eq .Site.Params.usersettings.sidebar "left" }}
-        <aside id="sidebar" class="transition-all duration-300 hidden md:block pl-3 pr-1 overflow-y-auto w-80">
+        <aside id="sidebar" class="transition-all duration-300 md:block hidden pl-1 pr-3 overflow-y-auto">
             <div class="flex items-center justify-between p-3">
-                <h1 class="menu-text font-semibold text-lg text-base">{{ .Title }}</h1>
+                <h1 id="sidebar-title" class="menu-text font-semibold text-lg text-base pr-6">{{ .Title }}</h1>
                 <!-- <button id="closeSidebarMobile" class="md:hidden">
                     <div class="flex items-center justify-center">
                     {{ partial "icon" "xmark" }}
