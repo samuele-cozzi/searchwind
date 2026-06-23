@@ -1,4 +1,5 @@
 // Configuration object for different providers
+const searchbox_id = "q";
 let search = null;
 let fuse_indexed = false;
 
@@ -48,10 +49,9 @@ function initializeSearch(provider) {
 
 // FUSE 
 function initFuse() {
-    const input_search = document.getElementById("q");
+    const input_search = document.getElementById(searchbox_id);
     buildFuseIndex(input_search);
     input_search.onkeyup = function (event) {
-        console.log("searching ...");
         executeFuseQuery(this.value);
     };
 }
@@ -246,6 +246,59 @@ function addWidgets() {
     ]);
 }
 
+// SEARCH KEYBOARD
+document.addEventListener("keydown", function (event) {
+    // Check if Ctrl, Shift, and P are pressed
+    if (event.ctrlKey && event.shiftKey && event.key === "P") {
+        event.preventDefault(); // Prevent default browser behavior (e.g., opening print dialog)
+        document.getElementById(searchbox_id).focus();
+    }
+
+    // Esc to close search wrapper
+    if (event.key == "Escape") {
+        document.getElementById(searchbox_id).value = "";
+        document.getElementById(searchbox_id).blur();
+        document.getElementById("list-items").classList.remove("hidden");
+        document.getElementById("search-results").classList.add("hidden");
+    }
+
+    // Down arrow to move down results list
+    if (event.key == "ArrowDown") {
+        // if (searchVisible && hasResults) {
+        //   event.preventDefault();
+        //   if (document.activeElement == input) {
+        //     first.focus();
+        //   } else if (document.activeElement == last) {
+        //     last.focus();
+        //   } else {
+        //     document.activeElement.parentElement.nextSibling.firstElementChild.focus();
+        //   }
+        // }
+    }
+
+    // Up arrow to move up results list
+    if (event.key == "ArrowUp") {
+        // if (searchVisible && hasResults) {
+        //   event.preventDefault();
+        //   if (document.activeElement == input) {
+        //     input.focus();
+        //   } else if (document.activeElement == first) {
+        //     input.focus();
+        //   } else {
+        //     document.activeElement.parentElement.previousSibling.firstElementChild.focus();
+        //   }
+        // }
+    }
+
+    // Enter to get to results
+    if (event.key == "Enter") {
+        if (!document.getElementById("search-results").classList.contains("hidden")){
+            event.preventDefault();
+            window.open(document.getElementById("search-hits").firstChild.querySelector('a').href, '_blank', 'noopener,noreferrer');
+        }
+    }
+});
+
 // DOCUMENT LOAD
 document.addEventListener('DOMContentLoaded', () => {
     // GLOBAL VARIABLES
@@ -311,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // SEARCHBAR
-    document.getElementById("q").addEventListener('input', (event) => {
+    document.getElementById(searchbox_id).addEventListener('input', (event) => {
         if (event.target.value.trim() !== '') {
             document.getElementById("list-items").classList.add("hidden");
             document.getElementById("search-results").classList.remove("hidden");
