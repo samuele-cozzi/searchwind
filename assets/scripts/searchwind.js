@@ -222,15 +222,26 @@ function addWidgets() {
             container: '#search-hits',
             templates: {
                 item: `
-                    <div class="flex gap-4">
-                        {{#imageUrl}}<img src="{{imageUrl}}" alt="{{title}}" class="w-20 h-20 object-cover rounded">{{/imageUrl}}
-                        <div class="flex-1">
-                            <h3 class="font-semibold text-lg text-gray-900 mb-1">{{title}}</h3>
-                            {{description}}
-                            
-                            {{#link}}<a href="{{link}}" target="_blank" class="text-blue-500 hover:text-blue-700 text-sm font-medium mt-2 inline-block">Listen →</a>{{/link}}
+                    <article class="item-container bg-background-card rounded-lg m-1 relative">
+                        <div class="item-link flex">    
+                            <a href="{{url}}" target="_blank" class="flex flex-col w-full">
+                                <div class="flex flex-col md:flex-row py-3 pr-3">
+                                    <!-- TITLE -->
+                                    <spam class="item-title px-3 pt-3 pb-1 text-m font-semibold text-primary max-w-64 truncate">
+                                        {{title}}
+                                    </span>
+                                </div>
+                                <div target="_blank" class="item-tags text-muted px-3 py-2 text-xs truncate border-t border-background">
+                                    <!-- EXTERNAL LINK -->
+                                    <span>
+                                        link
+                                    </span>
+                                    <!-- DATE -->
+                                    <span class="float-right">2025-01-01</span>
+                                </div>
+                            </a>
                         </div>
-                    </div>
+                    </article>
                 `,
                 empty: `
                     <div class="text-center py-12">

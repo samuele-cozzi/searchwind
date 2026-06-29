@@ -142,31 +142,8 @@
                 const input = document.getElementById("q");
 
                 if (isFirstRender) {
-                    const bt_search = document.getElementById("openSearch");
-                    const bt_search_m = document.getElementById("openSearch-m");
-                    const sidebar = document.getElementById("sidebar");
-                    const sidebar_facets = document.getElementById("sidebar-facets");
-                    const sidebar_settings = document.getElementById("sidebar-options");
-                    const sidebar_search = document.getElementById("sidebar-search");
-                    const main_content = document.getElementById("main-content");
-
-                    bt_search.addEventListener("click", () => {
-                        input.focus();
-                    });
-                    bt_search_m.addEventListener("click", () => {
-                        sidebar.classList.remove("hidden");
-                        input.focus();
-                    });
-
                     input.addEventListener("input", (event) => {
                         refine(event.target.value);
-                    });
-
-                    input.addEventListener("focus", () => {
-                        sidebar_search.classList.remove("hidden");
-                        sidebar_facets.classList.add("hidden");
-                        sidebar_settings.classList.add("hidden");
-                        main_content.classList.add("hidden");
                     });
                 }
 
@@ -302,6 +279,10 @@
         {{ end }}
 
     </div>
+
+    <script>
+        
+    </script>
 
 </body>
 </html>
