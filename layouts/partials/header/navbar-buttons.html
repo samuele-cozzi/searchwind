@@ -1,7 +1,7 @@
 <div id="navbar-buttons" class="flex">    
     {{ range .Site.Params.menu.shortcut }}
     
-    <button id="openCategories" class="p-3 w-full">
+    <button class="p-3 w-full">
         {{ if eq .linkType "external" }}
         <a href="{{ .url }}" target="_blank" class="flex items-center justify-center">
             {{ partial "icon" .logo }}

@@ -17,6 +17,20 @@
                 {{ partial "icon" "home" }}
             </a>
         </button>
+
+        {{ range .Site.Params.menu.shortcut }}
+        <button class="p-3 w-full">
+            {{ if eq .linkType "external" }}
+            <a href="{{ .url }}" target="_blank" class="flex items-center justify-center">
+                {{ partial "icon" .logo }}
+            </a>
+            {{ else }}
+            <a href="{{ $.Site.BaseURL }}{{ .url }}" class="flex items-center justify-center">
+                {{ partial "icon" .logo }}
+            </a>
+            {{ end }}
+        </button>
+        {{ end }}
         
         {{ if .Site.Params.showCategoriesMenu }}
         <button class="p-3 w-full">
@@ -32,12 +46,6 @@
             </a>
         </button>
         {{ end }}
-
-        <button id="openSearch-m" class="p-3 w-full">
-            <div class="flex items-center justify-center">
-                {{ partial "icon" "search" }}
-            </div>
-        </button>
         
         <button id="openSettings-m" class="p-3 w-full">
             <div class="flex items-center justify-center">

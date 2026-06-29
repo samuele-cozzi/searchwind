@@ -12,19 +12,19 @@
     showCategoriesMenu = false
     showTagsMenu = true
 
-[[params.menu.shortcut]]
-    logo = "star"
-    linkType = ""
-    url = "/tags/favorite"
+#[[params.menu.shortcut]]
+#    logo = "star"
+#    linkType = ""
+#    url = "/tags/favorite"
 
-[[params.menu.shortcut]]
-    logo = "github"
-    linkType = "external"
-    url = "https://github.com/samuele-cozzi"
+#[[params.menu.shortcut]]
+#    logo = "github"
+#    linkType = "external"
+#    url = "https://github.com/samuele-cozzi"
 
-[params.usersettings]
-    sidebar = "right" # left/right 
-    searchProvider = "fuse" # fuse/meilisearch/algolia/typesense
+#[params.usersettings]
+#    sidebar = "right" # left/right 
+#    searchProvider = "fuse" # fuse/meilisearch/algolia/typesense
 #    imageLink = external
     
 [params.pagelayout]
