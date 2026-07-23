@@ -1,47 +1,6 @@
 {{ define "main" }}
 
-  <div class="gap-4 my-4 p-4 rounded-xl shadow bg-background-card transition">
-    <h2 class="text-2xl font-semibold text-primary mb-4">Buttons with Full States</h2>
 
-    <p class="text-muted mb-4">
-      These buttons support hover, active, focus, and outline colors — all based on your theme tokens.
-    </p>
-
-    <div class="space-x-3">
-
-      <!-- PRIMARY BUTTON -->
-      <button class="px-4 py-2 rounded text-base 
-                                        bg-primary hover:bg-primary-hover active:bg-primary-active
-                                        focus:outline-none focus:ring-2 focus:ring-primary-outline transition">
-        Primary
-      </button>
-
-      <!-- SECONDARY BUTTON -->
-      <button class="px-4 py-2 rounded text-base 
-                                        bg-secondary hover:bg-secondary-hover active:bg-secondary-active
-                                        focus:outline-none focus:ring-2 focus:ring-secondary-outline transition">
-        Secondary
-      </button>
-
-      <!-- ACCENT BUTTON -->
-      <button class="px-4 py-2 rounded text-base
-                                        bg-accent hover:bg-accent-hover active:bg-accent-active
-                                        focus:outline-none focus:ring-2 focus:ring-accent-outline transition">
-        Accent
-      </button>
-
-    </div>
-  </div>
-
-  <div class="gap-4 my-4 p-4 rounded-xl shadow bg-background-card transition">
-    <h2 class="text-2xl font-semibold text-secondary mb-4">Text Colors</h2>
-
-    <p class="text-base">This is normal body text (automatic light/dark).</p>
-    <p class="text-muted">This is muted text for descriptions.</p>
-    <p class="text-primary">This text uses the primary color.</p>
-    <p class="text-secondary">This is secondary text.</p>
-    <p class="text-accent">This is accent text.</p>
-  </div>
 
   {{ partial "lists/container-list" . }}
   

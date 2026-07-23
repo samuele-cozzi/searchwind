@@ -281,7 +281,7 @@
     </div>
 
     <script>
-        
+        document.getElementById('my-grid').style.gridTemplateColumns = `repeat(${localStorage.getItem('listColsNumber') ?? {{ .Site.Params.usersettings.gridColumnNumber }}}, minmax(0, 1fr))`;
     </script>
 
 </body>

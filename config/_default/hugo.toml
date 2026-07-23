@@ -22,10 +22,11 @@
 #    linkType = "external"
 #    url = "https://github.com/samuele-cozzi"
 
-#[params.usersettings]
+[params.usersettings]
 #    sidebar = "right" # left/right 
 #    searchProvider = "fuse" # fuse/meilisearch/algolia/typesense
 #    imageLink = external
+    gridColumnNumber = 1
     
 [params.pagelayout]
     showTitle = false #true/false
