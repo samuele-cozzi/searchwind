@@ -1,6 +1,6 @@
 <div class="flex flex-col">
     <div class="flex items-center">
-        <button id="appearance-switcher" class="flex p-3 w-12" aria-label="Dark mode switcher">
+        <button id="appearance-switcher" class="flex p-3 w-12 justify-center" aria-label="Dark mode switcher">
             <div class="flex items-center justify-center dark:hidden">
                 {{ partial "icon" "moon" }}
             </div>
@@ -14,7 +14,12 @@
     </div>
 
     <div class="flex items-center">
-        <input id="list-colums-number" min="1" max="12" value="{{ .Site.Params.usersettings.gridColumnNumber }}" type="number" class="flex p-3 w-12" required />
+        <div id="searchbox" class="w-12">
+        <input id="list-colums-number" min="1" max="12" value="{{ .Site.Params.usersettings.gridColumnNumber }}" type="number" 
+            class="flex p-2 m-1 w-10 rounded-full border border-secondary bg-background
+                text-sm text-primary
+                focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" required />
+        </div>
         <span class="menu-text text-base flex items-center justify-center p-3">
             Columns Number
         </span>

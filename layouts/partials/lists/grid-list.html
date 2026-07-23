@@ -2,7 +2,7 @@
   {{ range .Pages}}
   
   <article class="@container/item-list item-container bg-background-card rounded-lg m-1 relative">
-        <div class="h-full item-link flex flex-col @[240px]/item-list:flex-row">    
+        <div class="h-full item-link flex flex-col @[320px]/item-list:flex-row">    
             <a href="{{ if eq .Site.Params.usersettings.imageLink "external" }}{{ .Params.source }}{{ else }}{{ .RelPermalink }}{{ end }}" 
                 {{if eq .Site.Params.usersettings.imageLink "external"}}target="_blank"{{ end }}
                 class="flex justify-center items-center min-w-[120px]">
@@ -20,14 +20,14 @@
             </a>
 
             <div class="flex flex-col w-full h-full">
-                <div class="flex flex-col @[240px]/item-list:flex-row py-3 pr-3">
+                <div class="flex flex-col @[480px]/item-list:flex-row py-3 pr-3">
                     <!-- TITLE -->
-                    <a href="{{ .RelPermalink }}" class="item-title px-3 pt-3 pb-1 text-m font-semibold text-primary max-w-64 truncate">
+                    <a href="{{ .RelPermalink }}" class="item-title px-3 pt-3 pb-1 text-m font-semibold text-primary min-w-32 max-w-64 truncate">
                         {{ .Title }}
                     </a>
 
                     <!-- TAGS -->
-                    <span class="ml-3 @[240px]/item-list:ml-auto">
+                    <span class="ml-3 @[480px]/item-list:ml-auto">
                         {{ if .Params.tags }}
                             <div class="flex flex-wrap gap-1">
                             {{ $tags := .Params.tags }}
