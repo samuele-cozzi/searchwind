@@ -47,10 +47,14 @@ module.exports = {
         DEFAULT: {
           css: {
             // Example: set base text color variables Typography uses
-            '--tw-prose-body': 'var(--text-base)',
-            '--tw-prose-headings': 'var(--text-primary)',
-            '--tw-prose-links': 'var(--text-secondary)',
-            '--tw-prose-bold': 'var(--text-primary)',
+            // '--tw-prose-body': 'var(--text-base)',
+            // '--tw-prose-headings': 'var(--text-primary)',
+            // '--tw-prose-links': 'var(--text-secondary)',
+            // '--tw-prose-bold': 'var(--text-primary)',
+            // '--tw-prose-quotes': 'var(--text-primary)',
+            // '--tw-prose-quote-borders': 'var(--bg-primary)',
+            // '--tw-prose-code': 'var(--text-base)',
+            // '--tw-prose-pre-code': 'var(--bg-primary)',
             // --tw-prose-body: var(--tw-prose-invert-body);
             // --tw-prose-headings: var(--tw-prose-invert-headings);
             // --tw-prose-lead: var(--tw-prose-invert-lead);
@@ -74,6 +78,17 @@ module.exports = {
             '--tw-prose-invert-headings': 'var(--text-primary)',
             '--tw-prose-invert-links': 'var(--text-secondary)',
             '--tw-prose-invert-bold': 'var(--text-primary)',
+            '--tw-prose-invert-quotes': 'var(--text-muted)',
+            '--tw-prose-invert-quote-borders': 'var(--color-bg)',
+            '--tw-prose-invert-code': 'var(--text-secondary)',
+            '--tw-prose-invert-pre-code': 'var(--color-bg)',
+            '--tw-prose-invert-pre-bg': 'var(--color-bg)',
+            '--tw-prose-invert-th-borders': 'var(--text-muted)',
+            '--tw-prose-invert-td-borders': 'var(--text-muted)',
+            '--tw-prose-invert-counters': 'var(--text-muted)',
+            '--tw-prose-invert-bullets': 'var(--text-muted)',
+            '--tw-prose-invert-kbd': 'var(--text-primary)',
+            '--tw-prose-invert-kbd-shadows': 'var(--text-primary)',
           },
         },
       },

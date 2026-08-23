@@ -10,10 +10,10 @@
     {{ end }}
     
     {{ if .Site.Params.pagelayout.showTitle }}
-    <h1 class="m-4 text-primary text-3xl md:text-4xl font-bold ">{{ .Title }}</h1>
+    <h1 class="text-primary text-3xl md:text-4xl font-bold ">{{ .Title }}</h1>
     {{ end }}
 
-    <div class="text-base prose prose-invert pt-4">
+    <div class="text-base prose prose-invert pt-4 max-w-full">
       {{ .Content }}
     </div>
 
