@@ -1,7 +1,12 @@
 {{ $featured := "" }}
 
-
 {{ $images := .Resources.ByType "image" }}
+
+{{/* Check if the 'cover' property is set in front matter */}}
+{{ if .Params.cover }}
+  {{ $featured = $images.GetMatch (printf "*%s*" .Params.cover) }}
+{{ end }}
+
 {{ range slice  "*feature*" "*background*" "*cover*" "*thumbnail*" }}
     {{ if not $featured }}{{ $featured = $images.GetMatch .  }}{{ end }}
 {{ end }}
