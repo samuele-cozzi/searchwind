@@ -1,0 +1,33 @@
+{{ $featured := "" }}
+
+
+{{ $images := .Resources.ByType "image" }}
+{{ range slice  "*feature*" "*background*" "*cover*" "*thumbnail*" }}
+    {{ if not $featured }}{{ $featured = $images.GetMatch .  }}{{ end }}
+{{ end }}
+
+{{ $caption := "" }}
+{{ if .Params.featureimagecaption }}
+  {{- $caption = .Params.featureimagecaption -}}
+{{ end }}
+
+{{- $alt := .Page.Title -}}
+{{- with .Page.Params.alt }}{{ $alt = . }}{{ end -}}
+
+
+{{ with $featured }}
+  <figure class="mb-4">
+    <img
+      src="{{ .RelPermalink }}"
+      alt="{{ $alt }}"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      class="w-full rounded-lg single_hero_round nozoom" />
+    {{ if $caption }}
+      <figcaption class="text-sm text-neutral-700 dark:text-neutral-400 hover:underline text-center">
+        {{ $caption | markdownify }}
+      </figcaption>
+    {{ end }}
+  </figure>
+{{ end }}

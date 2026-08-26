@@ -1,0 +1,20 @@
+{{ $featured := "" }}
+
+
+{{ $images := .Resources.ByType "image" }}
+{{ range slice  "*feature*" "*background*" "*cover*" "*thumbnail*" }}
+    {{ if not $featured }}{{ $featured = $images.GetMatch .  }}{{ end }}
+{{ end }}
+
+
+{{ with $featured }}
+  <div class="overflow-hidden h-36 md:h-56 lg:h-72 mb-4 rounded-lg">
+    <img
+      src="{{ .RelPermalink }}"
+      role="presentation"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      class="w-full h-full nozoom object-cover" />
+  </div>
+{{ end }}

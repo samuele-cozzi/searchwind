@@ -1,0 +1,17 @@
+{{ $featured := "" }}
+
+
+{{ $images := .Resources.ByType "image" }}
+{{ range slice  "*feature*" "*background*" "*cover*" "*thumbnail*" }}
+    {{ if not $featured }}{{ $featured = $images.GetMatch .  }}{{ end }}
+{{ end }}
+
+
+{{ with $featured }}
+    <img src="{{ .RelPermalink }}"
+        role="presentation"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+        class="item-img aspect-square px-3 py-3 rounded-full object-cover" />
+{{ end }}

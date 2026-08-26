@@ -6,17 +6,9 @@
             <a href="{{ if eq .Site.Params.usersettings.imageLink "external" }}{{ .Params.source }}{{ else }}{{ .RelPermalink }}{{ end }}" 
                 {{if eq .Site.Params.usersettings.imageLink "external"}}target="_blank"{{ end }}
                 class="flex justify-center items-center min-w-[120px]">
-            {{ $imageName := .Params.cover }}
-            {{ with .Resources.GetMatch $imageName }}
-            {{ with .Resize "120x" }}
-            <img src="{{ .RelPermalink }}"
-                role="presentation"
-                loading="lazy"
-                decoding="async"
-                fetchpriority="low"
-                class="item-img aspect-square px-3 py-3 rounded-full object-cover" />
-            {{ end }}
-            {{ end }}
+            
+                {{ partial "hero/circle.html" . }}
+            
             </a>
 
             <div class="flex flex-col w-full h-full">

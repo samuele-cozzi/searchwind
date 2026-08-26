@@ -2,12 +2,7 @@
 <div class="space-y-4">
   <article class="p-4 bg-background-card rounded-lg m-1 relative">
     
-    {{ $imageName := .Params.cover }}
-    {{ with .Resources.GetMatch $imageName }}
-    {{ with .Resize "800x600" }}
-    <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}">
-    {{ end }}
-    {{ end }}
+    {{ partial "hero/basic.html" . }}
     
     {{ if .Site.Params.pagelayout.showTitle }}
     <h1 class="text-primary text-3xl md:text-4xl font-bold ">{{ .Title }}</h1>
