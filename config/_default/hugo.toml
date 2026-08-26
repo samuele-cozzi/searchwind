@@ -27,6 +27,7 @@
 #    searchProvider = "fuse" # fuse/meilisearch/algolia/typesense
 #    imageLink = external
     gridColumnNumber = 1
+    gridColumnNumberMobile = 1
     
 [params.pagelayout]
     showTitle = false #true/false

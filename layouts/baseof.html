@@ -110,6 +110,7 @@
     </style>
 
     <script>
+        // Setting the global variables
         let currentProvider = '{{ .Site.Params.usersettings.searchProvider }}';
         if (localStorage.getItem("darkMode") === "true") {
             document.documentElement.classList.add("dark");
@@ -235,7 +236,7 @@
         <!-- MAIN CONTENT -->
         <div class="flex flex-1 flex-col">
 
-            <header class="flex bg-background-card items-center justify-between p-3 absolute inset-x-0 bottom-0">
+            <header class="flex bg-background-card items-center justify-between p-3 absolute inset-x-0 bottom-0 z-50">
 
                 {{ partial "header/navbar-left" . }}
 
@@ -293,7 +294,10 @@
     </div>
 
     <script>
-        document.getElementById('my-grid').style.gridTemplateColumns = `repeat(${localStorage.getItem('listColsNumber') ?? {{ .Site.Params.usersettings.gridColumnNumber }}}, minmax(0, 1fr))`;
+        const currentGridCols = '{{ .Site.Params.usersettings.gridColumnNumber }}'; 
+        const currentGridColsMobile = '{{ .Site.Params.usersettings.gridColumnNumberMobile }}';
+        const gridCols = (window.innerWidth <= 768) ? currentGridColsMobile : currentGridCols;
+        document.getElementById('my-grid').style.gridTemplateColumns = `repeat(${localStorage.getItem('listColsNumber') ?? gridCols}, minmax(0, 1fr))`;
     </script>
 
 </body>

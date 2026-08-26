@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // COLUMN NUMBER SCRIPT
     const input_list_column_number = document.getElementById('list-colums-number');
 
-    input_list_column_number.value = localStorage.getItem('listColsNumber') ?? input_list_column_number.value;
+    input_list_column_number.value = localStorage.getItem('listColsNumber') ?? ((window.innerWidth <= 768) ? currentGridColsMobile : currentGridCols);
     input_list_column_number.addEventListener('input', () => {
         const cols = parseInt(input_list_column_number.value, 10) || 1;
         document.getElementById('my-grid').style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
