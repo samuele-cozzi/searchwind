@@ -2,6 +2,8 @@
 const searchbox_id = "q";
 let search = null;
 let fuse_indexed = false;
+let selectedIndex = -1;
+const classSelected = "border-secondary";
 
 // UTILITIES
 function fetchJSON(path, callback) {
@@ -52,7 +54,9 @@ function initFuse() {
     const input_search = document.getElementById(searchbox_id);
     buildFuseIndex(input_search);
     input_search.onkeyup = function (event) {
-        executeFuseQuery(this.value);
+        if(event.key != "ArrowDown" && event.key != "ArrowUp" && event.key != "Enter") {
+            executeFuseQuery(this.value);
+        }
     };
 }
 
@@ -91,7 +95,7 @@ function executeFuseQuery(term) {
         : value.item.type;
       resultsHTML =
         resultsHTML +
-        `<article class="item-container bg-background-card rounded-lg m-1 relative">
+        `<article class="item-container bg-background-card rounded-lg m-1 border-2 relative">
             <div class="item-link flex">    
                 <a ${linkconfig} class="flex flex-col w-full">
                     <div class="flex flex-col md:flex-row py-3 pr-3">
@@ -222,7 +226,7 @@ function addWidgets() {
             container: '#search-hits',
             templates: {
                 item: `
-                    <article class="item-container bg-background-card rounded-lg m-1 relative">
+                    <article class="item-container bg-background-card rounded-lg m-1 border-2 relative">
                         <div class="item-link flex">    
                             <a href="{{url}}" target="_blank" class="flex flex-col w-full">
                                 <div class="flex flex-col md:flex-row py-3 pr-3">
@@ -275,37 +279,53 @@ document.addEventListener("keydown", function (event) {
 
     // Down arrow to move down results list
     if (event.key == "ArrowDown") {
-        // if (searchVisible && hasResults) {
-        //   event.preventDefault();
-        //   if (document.activeElement == input) {
-        //     first.focus();
-        //   } else if (document.activeElement == last) {
-        //     last.focus();
-        //   } else {
-        //     document.activeElement.parentElement.nextSibling.firstElementChild.focus();
-        //   }
-        // }
+        event.preventDefault();
+        const articles = document.querySelectorAll("#search-hits article");
+
+        // If there are no articles, do nothing
+        if (articles.length === 0) return;
+
+        // Remove "selected" from the currently selected article (if any)
+        if (selectedIndex >= -1 && selectedIndex < articles.length) {
+            (selectedIndex >= 0) ? articles[selectedIndex].classList.remove(classSelected) : null;
+        }
+
+        // Move to the next article (or wrap around to the first)
+        selectedIndex = (selectedIndex + 1) % articles.length;
+
+        // Add "selected" to the new article
+        articles[selectedIndex].classList.add(classSelected);
     }
 
     // Up arrow to move up results list
     if (event.key == "ArrowUp") {
-        // if (searchVisible && hasResults) {
-        //   event.preventDefault();
-        //   if (document.activeElement == input) {
-        //     input.focus();
-        //   } else if (document.activeElement == first) {
-        //     input.focus();
-        //   } else {
-        //     document.activeElement.parentElement.previousSibling.firstElementChild.focus();
-        //   }
-        // }
+        event.preventDefault();
+        const articles = document.querySelectorAll("#search-hits article");
+
+        // If there are no articles, do nothing
+        if (articles.length === 0) return;
+
+        // Remove "selected" from the currently selected article (if any)
+        if (selectedIndex >= -1 && selectedIndex < articles.length) {
+            (selectedIndex >= 0) ? articles[selectedIndex].classList.remove(classSelected) : null;
+        }
+
+        // Move to the next article (or wrap around to the first)
+        selectedIndex = (selectedIndex - 1) % articles.length;
+
+        // Add "selected" to the new article
+        (selectedIndex >= 0) ? articles[selectedIndex].classList.add(classSelected) : null;
     }
 
     // Enter to get to results
     if (event.key == "Enter") {
         if (!document.getElementById("search-results").classList.contains("hidden")){
             event.preventDefault();
-            window.open(document.getElementById("search-hits").firstChild.querySelector('a').href, '_blank', 'noopener,noreferrer');
+
+            let selectedArticle = document.querySelector("#search-hits ." + classSelected);
+
+            (selectedArticle) ? window.open(selectedArticle.querySelector('a').href, '_blank', 'noopener,noreferrer') :
+                window.open(document.getElementById("search-hits").firstChild.querySelector('a').href, '_blank', 'noopener,noreferrer');
         }
     }
 });
