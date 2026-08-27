@@ -47,10 +47,6 @@
         </button>
         {{ end }}
         
-        <button id="openSettings-m" class="p-3 w-full">
-            <div class="flex items-center justify-center">
-                {{ partial "icon" "settings" }}
-            </div>
-        </button>
+        {{ partial "inputs/dark-mode-switcher.html" . }}
     </div>
 </nav>

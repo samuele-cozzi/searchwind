@@ -1,11 +1,11 @@
 <div class="flex items-center space-x-4">
     <button id="openMenu" class="hidden md:block">
-    {{ if eq .Site.Params.usersettings.sidebar "left" }}
+    {{ if eq .Site.Params.header "left" }}
         <div class="flex items-center justify-center">
             {{ partial "icon" "sidebar-left" }}
         </div>
     {{ end }}
-    {{ if eq .Site.Params.usersettings.sidebar "right" }}
+    {{ if eq .Site.Params.header "right" }}
         <div class="flex items-center justify-center">
             {{ partial "icon" "sidebar-right" }}
         </div>

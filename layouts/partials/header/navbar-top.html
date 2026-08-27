@@ -1,0 +1,41 @@
+<div class="md:flex hidden w-full">
+    <button class="p-3">
+        <a href="{{ $.Site.BaseURL }}" class="flex items-center justify-center">
+            {{ partial "icon" "home" }}
+        </a>
+    </button>
+
+    <h1 class="menu-text p-3 w-full font-semibold text-lg text-primary pr-6">{{ .Site.Title }}</h1>
+
+    {{ range .Site.Params.menu.shortcut }}
+    <button class="flex p-3 w-12 justify-center">
+        {{ if eq .linkType "external" }}
+        <a href="{{ .url }}" target="_blank" class="flex items-center justify-center">
+            {{ partial "icon" .logo }}
+        </a>
+        {{ else }}
+        <a href="{{ $.Site.BaseURL }}{{ .url }}" class="flex items-center justify-center">
+            {{ partial "icon" .logo }}
+        </a>
+        {{ end }}
+    </button>
+    {{ end }}
+    
+    {{ if .Site.Params.showCategoriesMenu }}
+    <button class="flex p-3 w-12 justify-center">
+        <a href="{{ $.Site.BaseURL }}/categories" class="flex items-center justify-center">
+            {{ partial "icon" "categories" }}
+        </a>
+    </button>
+    {{ end }}
+    {{ if .Site.Params.showTagsMenu }}
+    <button class="flex p-3 w-12 justify-center">
+        <a href="{{ $.Site.BaseURL }}/tags" class="flex items-center justify-center">
+            {{ partial "icon" "tag" }}
+        </a>
+    </button>
+    {{ end }}
+
+    {{ partial "inputs/dark-mode-switcher.html" . }}
+
+</div>

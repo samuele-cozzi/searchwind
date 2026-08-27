@@ -1,3 +1,7 @@
-<a href="{{ $.Site.BaseURL }}" class="hidden md:flex">
-    <div class="flex items-center justify-center">{{ partial "icon" .Site.Params.logo }}</div>
-</a>
+{{ if ne .Site.Params.header "top" }}
+
+    <a href="{{ $.Site.BaseURL }}" class="hidden md:flex">
+        <div class="flex items-center justify-center">{{ partial "icon" .Site.Params.logo }}</div>
+    </a>
+
+{{ end}}

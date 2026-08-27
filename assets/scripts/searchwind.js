@@ -323,14 +323,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const main_content = document.getElementById("main-content");
 
     // SETTINGS BUTTON
-    bt_settings.addEventListener("click", () => {
+    bt_settings?.addEventListener("click", () => {
         sidebar_settings.classList.remove("hidden");
         sidebar_facets.classList.add("hidden");
         sidebar_search.classList.add("hidden");
         main_content.classList.remove("hidden");
     });
 
-    bt_settings_m.addEventListener("click", () => {
+    bt_settings_m?.addEventListener("click", () => {
         sidebar.classList.remove("hidden");
         sidebar_settings.classList.remove("hidden");
         sidebar_facets.classList.add("hidden");
@@ -355,8 +355,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // COLUMN NUMBER SCRIPT
     const input_list_column_number = document.getElementById('list-colums-number');
 
-    input_list_column_number.value = localStorage.getItem('listColsNumber') ?? ((window.innerWidth <= 768) ? currentGridColsMobile : currentGridCols);
-    input_list_column_number.addEventListener('input', () => {
+    input_list_column_number && (input_list_column_number.value = localStorage.getItem('listColsNumber') ?? ((window.innerWidth <= 768) ? currentGridColsMobile : currentGridCols));
+    input_list_column_number?.addEventListener('input', () => {
         const cols = parseInt(input_list_column_number.value, 10) || 1;
         document.getElementById('my-grid').style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
         localStorage.setItem("listColsNumber", cols);

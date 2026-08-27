@@ -3,8 +3,8 @@
   
   <article class="@container/item-list item-container bg-background-card rounded-lg m-1 relative">
         <div class="h-full item-link flex flex-col @[320px]/item-list:flex-row">    
-            <a href="{{ if eq .Site.Params.usersettings.imageLink "external" }}{{ .Params.source }}{{ else }}{{ .RelPermalink }}{{ end }}" 
-                {{if eq .Site.Params.usersettings.imageLink "external"}}target="_blank"{{ end }}
+            <a href="{{ if eq .Site.Params.imageLink "external" }}{{ .Params.source }}{{ else }}{{ .RelPermalink }}{{ end }}" 
+                {{if eq .Site.Params.imageLink "external"}}target="_blank"{{ end }}
                 class="flex justify-center items-center min-w-[120px]">
             
                 {{ partial "hero/circle.html" . }}

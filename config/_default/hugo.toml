@@ -8,9 +8,13 @@
 
 [params]
     logo = "home"
+    header = "top" # top/left/right
 
     showCategoriesMenu = false
     showTagsMenu = true
+
+    searchProvider = "fuse" # fuse/meilisearch/algolia/typesense
+    imageLink = "" # empty/external
 
 #[[params.menu.shortcut]]
 #    logo = "star"
@@ -23,10 +27,7 @@
 #    url = "https://github.com/samuele-cozzi"
 
 [params.usersettings]
-#    sidebar = "right" # left/right 
-#    searchProvider = "fuse" # fuse/meilisearch/algolia/typesense
-#    imageLink = external
-    gridColumnNumber = 1
+    gridColumnNumber = 6
     gridColumnNumberMobile = 1
     
 [params.pagelayout]
