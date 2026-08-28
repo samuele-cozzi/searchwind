@@ -193,6 +193,9 @@
 
     {{- $styles := resources.Get "scripts/searchwind.js" -}}
     <script src={{ $styles.RelPermalink }} ></script>
+    
+    
+    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
 
     {{ with .OutputFormats.Get "WebAppManifest" }}
     <link rel="{{ .Rel }}" href="{{ .RelPermalink }}">
@@ -311,6 +314,8 @@
         const gridCols = (window.innerWidth <= 768) ? currentGridColsMobile : currentGridCols;
         document.getElementById('my-grid') && (document.getElementById('my-grid').style.gridTemplateColumns = `repeat(${localStorage.getItem('listColsNumber') ?? gridCols}, minmax(0, 1fr))`);
     </script>
+
+    {{ with .OutputFormats.Get "ServiceWorker" }}
     {{ if not hugo.IsServer }}
     <script>
         if ("serviceWorker" in navigator) {
@@ -321,6 +326,7 @@
         });
         }
     </script>
+    {{ end }}
     {{ end }}
 
 </body>
