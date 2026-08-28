@@ -1,13 +1,32 @@
 [outputs]
-    home = ["HTML", "JSON", "RSS"]
+    home = ["HTML", "JSON", "RSS", "WebAppManifest", "ServiceWorker"]
 
 [outputFormats.JSON]
     mediaType = "application/json"
     baseName = "index"
     isPlainText = true
 
+[mediaTypes."application/manifest+json"]
+  suffixes = ["json"]
+
+[outputFormats.WebAppManifest]
+  mediaType   = "application/manifest+json"
+  baseName    = "manifest"
+  isPlainText = true
+  rel         = "manifest"
+
+[mediaTypes."application/javascript"]
+  suffixes = ["js"]
+
+[outputFormats.ServiceWorker]
+  mediaType   = "application/javascript"
+  baseName    = "sw"
+  isPlainText = true
+
 [params]
     logo = "home"
+    shortName = ""
+    description = ""
     header = "top" # top/left/right
 
     showCategoriesMenu = false

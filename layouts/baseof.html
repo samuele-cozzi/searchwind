@@ -193,6 +193,10 @@
 
     {{- $styles := resources.Get "scripts/searchwind.js" -}}
     <script src={{ $styles.RelPermalink }} ></script>
+
+    {{ with .OutputFormats.Get "WebAppManifest" }}
+    <link rel="{{ .Rel }}" href="{{ .RelPermalink }}">
+    {{ end }}
 </head>
 
 <body class="h-screen overflow-hidden bg-background-card">
@@ -307,6 +311,17 @@
         const gridCols = (window.innerWidth <= 768) ? currentGridColsMobile : currentGridCols;
         document.getElementById('my-grid') && (document.getElementById('my-grid').style.gridTemplateColumns = `repeat(${localStorage.getItem('listColsNumber') ?? gridCols}, minmax(0, 1fr))`);
     </script>
+    {{ if not hugo.IsServer }}
+    <script>
+        if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker
+            .register("{{ "sw.js" | absURL }}")
+            .catch((err) => console.error("SW registration failed:", err));
+        });
+        }
+    </script>
+    {{ end }}
 
 </body>
 </html>
