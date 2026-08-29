@@ -322,6 +322,14 @@ document.addEventListener("keydown", function (event) {
         if (!document.getElementById("search-results").classList.contains("hidden")){
             event.preventDefault();
 
+            const query = document.getElementById(searchbox_id).value.trim();
+            
+            if (query.startsWith("!")) {
+                const url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
+                window.open(url, '_blank', 'noopener,noreferrer');
+                return;
+            }
+
             let selectedArticle = document.querySelector("#search-hits ." + classSelected);
 
             (selectedArticle) ? window.open(selectedArticle.querySelector('a').href, '_blank', 'noopener,noreferrer') :
