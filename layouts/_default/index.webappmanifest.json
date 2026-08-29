@@ -1,8 +1,8 @@
 {
   "name": "{{ .Site.Title }}",
-  "short_name": "{{ .Site.Params.shortName | default .Site.Title }}",
-  "description": "{{ .Site.Params.description }}",
-  "start_url": "{{ "/" | absURL }}",
+  "short_name": "{{ .Site.Params.wpaShortName | default .Site.Title }}",
+  "description": "{{ .Site.Params.wpaDescription }}",
+  "start_url": "{{ .Site.Params.wpaStartURL }}",
   "display": "standalone",
   "background_color": "{{ .Site.Params.colors.light.bg }}",
   "theme_color": "{{ .Site.Params.colors.light.primary }}",

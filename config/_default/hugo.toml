@@ -25,8 +25,9 @@
 
 [params]
     logo = "home"
-    shortName = ""
-    description = ""
+    wpaShortName = ""
+    wpaDescription = ""
+    wpaStartURL = "/"
     header = "top" # top/left/right
 
     showCategoriesMenu = false
